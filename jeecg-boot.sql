@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50726
 File Encoding         : 65001
 
-Date: 2020-11-05 19:11:24
+Date: 2020-11-24 21:21:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -322,6 +322,22 @@ CREATE TABLE `demo_field_def_val_sub` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
+-- Table structure for hhhahoa
+-- ----------------------------
+DROP TABLE IF EXISTS `hhhahoa`;
+CREATE TABLE `hhhahoa` (
+  `id` varchar(36) NOT NULL COMMENT '主键',
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+  `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新日期',
+  `sys_org_code` varchar(64) DEFAULT NULL COMMENT '所属部门',
+  `sadf` varchar(32) DEFAULT NULL COMMENT ' 士大夫',
+  `hgjj` varchar(32) DEFAULT NULL COMMENT 'hgjg',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
 -- Table structure for jeecg_monthly_growth_analysis
 -- ----------------------------
 DROP TABLE IF EXISTS `jeecg_monthly_growth_analysis`;
@@ -420,6 +436,15 @@ CREATE TABLE `joa_demo` (
   `update_time` datetime DEFAULT NULL COMMENT '修改时间',
   `update_by` varchar(32) DEFAULT NULL COMMENT '修改人id'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='流程测试';
+
+-- ----------------------------
+-- Table structure for kkkk
+-- ----------------------------
+DROP TABLE IF EXISTS `kkkk`;
+CREATE TABLE `kkkk` (
+  `organ` varchar(4) CHARACTER SET utf8 DEFAULT NULL,
+  `name` varchar(40) CHARACTER SET utf8 DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Table structure for monitor_log
@@ -1553,33 +1578,79 @@ CREATE TABLE `sys_user_role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='用户角色表';
 
 -- ----------------------------
--- Table structure for tb_sell_waste_all201909
+-- Table structure for tb_mark
 -- ----------------------------
-DROP TABLE IF EXISTS `tb_sell_waste_all201909`;
-CREATE TABLE `tb_sell_waste_all201909` (
-  `organ` varchar(4) DEFAULT NULL,
-  `selldate` varchar(10) DEFAULT NULL,
-  `selltime` varchar(8) DEFAULT NULL,
+DROP TABLE IF EXISTS `tb_mark`;
+CREATE TABLE `tb_mark` (
+  `code` varchar(10) DEFAULT NULL,
   `class` varchar(2) DEFAULT NULL,
-  `posid` varchar(10) DEFAULT NULL,
-  `receid` varchar(10) DEFAULT NULL,
-  `receipt` varchar(20) DEFAULT NULL,
-  `code` varchar(18) DEFAULT NULL,
-  `amount` double DEFAULT NULL,
-  `sum_sell` double DEFAULT NULL,
-  `sum_disc` double DEFAULT NULL,
-  `agio` double DEFAULT NULL,
-  `price` double DEFAULT NULL,
+  `name` varchar(50) DEFAULT NULL,
+  `factory` varchar(10) DEFAULT NULL,
+  `remark` varchar(200) DEFAULT NULL,
+  `deleted` varchar(1) DEFAULT NULL,
+  `moditime` varchar(27) DEFAULT NULL,
+  `grade` int(11) DEFAULT NULL,
   `type` varchar(10) DEFAULT NULL,
-  `payment` varchar(10) DEFAULT NULL,
-  `region` varchar(10) DEFAULT NULL,
-  `cardid` varchar(16) DEFAULT NULL,
-  `barcode` varchar(18) DEFAULT NULL,
-  `selltype` int(11) DEFAULT NULL,
-  `billtype` int(11) DEFAULT NULL,
-  `guest_type` varchar(2) DEFAULT NULL,
+  `grade_code` varchar(2) DEFAULT NULL,
+  `mark_local` varchar(60) DEFAULT NULL,
+  `mark_style` varchar(60) DEFAULT NULL,
+  `mark_story` longtext,
+  `price_min` double DEFAULT NULL,
+  `price_max` double DEFAULT NULL,
+  `sort` varchar(10) DEFAULT NULL,
+  KEY `index_name` (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for tb_organ
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_organ`;
+CREATE TABLE `tb_organ` (
+  `organ` varchar(4) DEFAULT NULL,
+  `name` varchar(40) DEFAULT NULL,
+  `centerid` varchar(4) DEFAULT NULL,
+  `nature` int(11) DEFAULT NULL,
+  `city` varchar(30) DEFAULT NULL,
+  `postcode` varchar(6) DEFAULT NULL,
+  `sellers` int(11) DEFAULT NULL,
+  `address` varchar(100) DEFAULT NULL,
+  `style` varchar(60) DEFAULT NULL,
+  `tel` varchar(20) DEFAULT NULL,
+  `shopkeeper` varchar(10) DEFAULT NULL,
+  `tel1` varchar(20) DEFAULT NULL,
+  `server` varchar(20) DEFAULT NULL,
+  `serverip` varchar(23) DEFAULT NULL,
+  `srvport` int(11) DEFAULT NULL,
+  `lockip` varchar(23) DEFAULT NULL,
+  `manager` varchar(10) DEFAULT NULL,
+  `tel2` varchar(20) DEFAULT NULL,
+  `fax` varchar(20) DEFAULT NULL,
+  `setuptime` varchar(27) DEFAULT NULL,
+  `acceptdate` varchar(10) DEFAULT NULL,
+  `runtime` varchar(27) DEFAULT NULL,
+  `opentime` varchar(27) DEFAULT NULL,
+  `pc_amou` int(11) DEFAULT NULL,
+  `pos_amou` int(11) DEFAULT NULL,
+  `bank` varchar(60) DEFAULT NULL,
+  `account` varchar(30) DEFAULT NULL,
+  `taxnum` varchar(30) DEFAULT NULL,
+  `finance` varchar(4) DEFAULT NULL,
+  `client` varchar(10) DEFAULT NULL,
+  `provider` varchar(10) DEFAULT NULL,
+  `plumode` int(11) DEFAULT NULL,
+  `sysmode` int(11) DEFAULT NULL,
   `state` int(11) DEFAULT NULL,
-  `nd` varchar(36) DEFAULT NULL
+  `deleted` varchar(1) DEFAULT NULL,
+  `moditime` varchar(27) DEFAULT NULL,
+  `shop_type` varchar(4) DEFAULT NULL,
+  `comms_inshop` int(11) DEFAULT NULL,
+  `psi_bl` double DEFAULT NULL,
+  `procemode` int(11) DEFAULT NULL,
+  `acreage` double DEFAULT NULL,
+  `ps_type` int(11) DEFAULT NULL,
+  `area` varchar(10) DEFAULT NULL,
+  `eb_state` int(11) DEFAULT NULL,
+  KEY `index_name` (`organ`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -1708,6 +1779,42 @@ CREATE TABLE `test_shoptype_tree` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
+-- Table structure for tmp_test_table
+-- ----------------------------
+DROP TABLE IF EXISTS `tmp_test_table`;
+CREATE TABLE `tmp_test_table` (
+  `id` varchar(36) NOT NULL,
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+  `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新日期',
+  `sys_org_code` varchar(64) DEFAULT NULL COMMENT '所属部门',
+  `goodsid` varchar(16) DEFAULT NULL COMMENT '商品编码',
+  `barcodeid` varchar(16) DEFAULT NULL COMMENT '商品分类',
+  `deptid` varchar(16) DEFAULT NULL COMMENT '商品分类（小类）',
+  `name` varchar(64) DEFAULT NULL COMMENT '商品名称',
+  `flag` int(11) NOT NULL COMMENT '商品状态',
+  `status` varchar(32) NOT NULL COMMENT '商品状态名称',
+  `brand` varchar(8) DEFAULT NULL COMMENT '品牌',
+  `spec` varchar(64) DEFAULT NULL COMMENT '规格',
+  `indate` datetime DEFAULT NULL COMMENT '建档日期',
+  `deleted` varchar(1) DEFAULT NULL COMMENT '删除状态',
+  `xlname` varchar(30) CHARACTER SET utf8 DEFAULT NULL COMMENT '小类名称',
+  KEY `index_name` (`brand`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Table structure for v_minorder
+-- ----------------------------
+DROP TABLE IF EXISTS `v_minorder`;
+CREATE TABLE `v_minorder` (
+  `shopid` varchar(255) DEFAULT NULL,
+  `goodsid` varchar(18) DEFAULT NULL,
+  `minorderqty` double DEFAULT NULL,
+  `minstockqty` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
 -- Table structure for zh_season_xl
 -- ----------------------------
 DROP TABLE IF EXISTS `zh_season_xl`;
@@ -1720,21 +1827,33 @@ CREATE TABLE `zh_season_xl` (
   `sys_org_code` varchar(64) DEFAULT NULL COMMENT '所属部门',
   `ywqid` varchar(8) DEFAULT NULL COMMENT '业务区标识',
   `xlid` varchar(16) DEFAULT NULL COMMENT '小类编码',
-  `seasontype` varchar(1) DEFAULT NULL COMMENT '季节性商品分类',
   `begindate` varchar(4) DEFAULT NULL COMMENT '季节开始日期',
+  `enddate` varchar(4) DEFAULT NULL COMMENT '季节结束日期',
+  `arrdate` varchar(4) DEFAULT NULL COMMENT '季节性商品起季是首次到货日期',
+  `rate1` decimal(16,2) DEFAULT NULL COMMENT '季节时间达到Period1，日均销量的折扣比例',
+  `rate2` decimal(16,2) DEFAULT NULL COMMENT '季节时间达到Period2，日均销量的折扣比例',
+  `period2` decimal(16,2) DEFAULT NULL COMMENT '季节时间达到的比例2',
+  `period1` decimal(16,2) DEFAULT NULL COMMENT '季节时间达到的比例1',
+  `sdate` datetime DEFAULT NULL COMMENT '数据更新日期',
   PRIMARY KEY (`id`),
   UNIQUE KEY `唯一值` (`ywqid`,`xlid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
--- Table structure for zn_calender
+-- Table structure for zn_calendar
 -- ----------------------------
-DROP TABLE IF EXISTS `zn_calender`;
-CREATE TABLE `zn_calender` (
-  `id` varchar(36) NOT NULL COMMENT '主键',
-  `sundatedate` datetime DEFAULT NULL COMMENT '阳历日期',
+DROP TABLE IF EXISTS `zn_calendar`;
+CREATE TABLE `zn_calendar` (
+  `id` varchar(36) NOT NULL,
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+  `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新日期',
+  `sys_org_code` varchar(64) DEFAULT NULL COMMENT '所属部门',
+  `sundatedate` datetime DEFAULT NULL COMMENT '日期',
   `moondate` varchar(32) DEFAULT NULL COMMENT '阴历日期',
-  `holidayid` varchar(10) DEFAULT '0' COMMENT '节日标识',
+  `week_day` varchar(32) DEFAULT NULL COMMENT '星期',
+  `holidayid` varchar(8) DEFAULT NULL COMMENT '节日代码',
   `holidayname` varchar(32) DEFAULT NULL COMMENT '节日名称',
   `startdate` datetime DEFAULT NULL COMMENT '节日启动时间点',
   `enddate` datetime DEFAULT NULL COMMENT '节日结束时间点',
@@ -1754,6 +1873,11 @@ CREATE TABLE `zn_config` (
   `safedays` int(11) DEFAULT NULL COMMENT '安全库存天数',
   `arrivaldays` int(10) DEFAULT NULL COMMENT '到货周期',
   `dms_minorder` decimal(16,3) DEFAULT NULL COMMENT '最小起订量可销天数',
+  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+  `sys_org_code` varchar(64) DEFAULT NULL COMMENT '所属部门',
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新日期',
+  `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -1770,6 +1894,11 @@ CREATE TABLE `zn_dayly_sales` (
   `disvalue` decimal(16,2) DEFAULT NULL COMMENT '折扣额',
   `qty` decimal(16,3) DEFAULT NULL COMMENT '销售数量',
   `disc` decimal(16,2) DEFAULT NULL COMMENT '实际售价',
+  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+  `sys_org_code` varchar(64) DEFAULT NULL COMMENT '所属部门',
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新日期',
+  `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -1782,6 +1911,11 @@ CREATE TABLE `zn_disc_line` (
   `level` varchar(1) DEFAULT NULL COMMENT '商品分类的级别',
   `lbid` varchar(16) DEFAULT NULL COMMENT '部类或采购线id',
   `disc_line` decimal(16,2) DEFAULT NULL COMMENT '折扣线',
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新日期',
+  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+  `sys_org_code` varchar(64) DEFAULT NULL COMMENT '所属部门',
+  `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -1799,7 +1933,7 @@ CREATE TABLE `zn_goods` (
   `shopid` varchar(8) DEFAULT NULL COMMENT '门店编码',
   `xlid` varchar(32) DEFAULT NULL COMMENT '小类编码',
   `goodsid` varchar(32) DEFAULT NULL COMMENT '商品编码',
-  `classtype` varchar(1) DEFAULT NULL COMMENT '商品类别',
+  `classtype` varchar(1) DEFAULT NULL COMMENT '补货类型',
   `normalprice` decimal(16,2) DEFAULT NULL COMMENT '定价',
   `minstock` decimal(16,2) DEFAULT NULL COMMENT '最小库存数量',
   `minorder` decimal(16,2) DEFAULT NULL COMMENT '最小起订量',
@@ -1807,11 +1941,15 @@ CREATE TABLE `zn_goods` (
   `qty` decimal(16,3) DEFAULT NULL COMMENT '计算生成的补货数量',
   `flag` varchar(1) DEFAULT NULL COMMENT '补货标识',
   `sdate` datetime DEFAULT NULL COMMENT '更新日期时间',
-  `season_begindate` varchar(4) DEFAULT NULL COMMENT '季节开始日期',
   `holiday_begindate` datetime DEFAULT NULL COMMENT '节日开始日期',
   `seasontype` varchar(1) DEFAULT NULL COMMENT '季节属性',
   `holidaytype` varchar(1) DEFAULT NULL COMMENT '节日属性',
   `holiday_enddate` datetime DEFAULT NULL COMMENT '节日结束日期',
+  `rate` varchar(32) DEFAULT NULL COMMENT '季节下降点之后日均销量的折扣比例',
+  `aweek` int(10) DEFAULT NULL COMMENT '季节下降点',
+  `arrdate` varchar(4) DEFAULT NULL COMMENT '季节性商品起季时首次到货日期',
+  `zs` decimal(16,2) DEFAULT NULL COMMENT '春节指数',
+  `ho_rate` decimal(16,2) DEFAULT NULL COMMENT '节日安全系数',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -1829,7 +1967,7 @@ CREATE TABLE `zn_goods_his` (
   `shopid` varchar(8) DEFAULT NULL COMMENT '门店编码',
   `xlid` varchar(32) DEFAULT NULL COMMENT '小类编码',
   `goodsid` varchar(32) DEFAULT NULL COMMENT '商品编码',
-  `classtype` varchar(1) DEFAULT NULL COMMENT '商品类别',
+  `classtype` varchar(1) DEFAULT NULL COMMENT '补货类型',
   `normalprice` decimal(16,2) DEFAULT NULL COMMENT '定价',
   `minstock` decimal(16,2) DEFAULT NULL COMMENT '最小库存数量',
   `minorder` decimal(16,2) DEFAULT NULL COMMENT '最小起订量',
@@ -1837,11 +1975,15 @@ CREATE TABLE `zn_goods_his` (
   `qty` decimal(16,3) DEFAULT NULL COMMENT '计算生成的补货数量',
   `flag` varchar(1) DEFAULT NULL COMMENT '补货标识',
   `sdate` datetime DEFAULT NULL COMMENT '更新日期时间',
-  `season_begindate` varchar(4) DEFAULT NULL COMMENT '季节开始日期',
   `holiday_begindate` datetime DEFAULT NULL COMMENT '节日开始日期',
   `seasontype` varchar(1) DEFAULT NULL COMMENT '季节属性',
   `holidaytype` varchar(1) DEFAULT NULL COMMENT '节日属性',
   `holiday_enddate` datetime DEFAULT NULL COMMENT '节日结束日期',
+  `rate` varchar(32) DEFAULT NULL COMMENT '季节下降点之后日均销量的折扣比例',
+  `aweek` int(10) DEFAULT NULL COMMENT '季节下降点',
+  `arrdate` varchar(4) DEFAULT NULL COMMENT '季节性商品起季时首次到货日期',
+  `zs` decimal(16,2) DEFAULT NULL COMMENT '春节指数',
+  `ho_rate` decimal(16,2) DEFAULT NULL COMMENT '节日安全系数',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -1855,6 +1997,31 @@ CREATE TABLE `zn_his_stock` (
   `shopid` varchar(8) DEFAULT NULL COMMENT '门店编码',
   `goodsid` varchar(32) DEFAULT NULL COMMENT '商品编码',
   `closeqty` decimal(16,3) DEFAULT NULL COMMENT '日终库存',
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新日期',
+  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+  `sys_org_code` varchar(64) DEFAULT NULL COMMENT '所属部门',
+  `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Table structure for zn_holiday_goods
+-- ----------------------------
+DROP TABLE IF EXISTS `zn_holiday_goods`;
+CREATE TABLE `zn_holiday_goods` (
+  `id` varchar(36) NOT NULL,
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+  `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新日期',
+  `sys_org_code` varchar(64) DEFAULT NULL COMMENT '所属部门',
+  `ywqid` varchar(8) DEFAULT NULL COMMENT '业务区',
+  `holidayid` varchar(8) DEFAULT NULL COMMENT '节日代码',
+  `xlid` varchar(16) DEFAULT NULL COMMENT '小类编码',
+  `goodsid` varchar(32) DEFAULT NULL COMMENT '商品编码',
+  `goodsname` varchar(64) DEFAULT NULL COMMENT '商品名称',
+  `sdate` datetime DEFAULT NULL COMMENT '更新日期',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -1872,6 +2039,9 @@ CREATE TABLE `zn_holiday_xl` (
   `ywqid` varchar(8) DEFAULT NULL COMMENT '业务区标识',
   `holidayid` varchar(8) DEFAULT NULL COMMENT '节日代码',
   `xlid` varchar(16) DEFAULT NULL COMMENT '小类编码',
+  `rate` decimal(16,2) DEFAULT NULL COMMENT '节日安全系数',
+  `zs` decimal(16,2) DEFAULT NULL COMMENT '春节指数',
+  `salevalue` decimal(16,2) DEFAULT NULL COMMENT '去年小类销售额',
   PRIMARY KEY (`id`),
   UNIQUE KEY `唯一值` (`ywqid`,`holidayid`,`xlid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -1911,6 +2081,11 @@ CREATE TABLE `zn_price_dms` (
   `trueprice` decimal(16,2) DEFAULT NULL COMMENT '实际售价',
   `dms` decimal(16,3) DEFAULT NULL COMMENT '实际售价对应的日均销量',
   `sdate` datetime DEFAULT NULL COMMENT '更新或新增日期',
+  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+  `sys_org_code` varchar(64) DEFAULT NULL COMMENT '所属部门',
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新日期',
+  `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -1954,6 +2129,10 @@ CREATE TABLE `zn_prom_detail_his` (
   `flag` varchar(1) DEFAULT NULL COMMENT '补货标识',
   `begindate` datetime DEFAULT NULL COMMENT '促销开始日期时间',
   `sdate` date DEFAULT NULL COMMENT '备份日期',
+  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新日期',
+  `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -1973,6 +2152,11 @@ CREATE TABLE `zn_prom_detail_tmp` (
   `flag` varchar(1) DEFAULT NULL COMMENT '补货标识',
   `begindate` datetime DEFAULT NULL COMMENT '促销开始日期时间',
   `sdate` date DEFAULT NULL COMMENT '备份日期',
+  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+  `sys_org_code` varchar(64) DEFAULT NULL COMMENT '所属部门',
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新日期',
+  `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -1987,9 +2171,9 @@ CREATE TABLE `zn_prom_goods` (
   `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
   `update_time` datetime DEFAULT NULL COMMENT '更新日期',
   `sys_org_code` varchar(64) DEFAULT NULL COMMENT '所属部门',
-  `serialid` varchar(32) DEFAULT NULL COMMENT '序号',
+  `serialid` varchar(36) DEFAULT NULL COMMENT '序号',
   `goodsid` varchar(32) DEFAULT NULL COMMENT '商品编码',
-  `price` decimal(10,2) DEFAULT NULL COMMENT '促销售价',
+  `price` decimal(16,2) DEFAULT NULL COMMENT '促销售价',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -1998,7 +2182,7 @@ CREATE TABLE `zn_prom_goods` (
 -- ----------------------------
 DROP TABLE IF EXISTS `zn_prom_plan`;
 CREATE TABLE `zn_prom_plan` (
-  `id` varchar(36) NOT NULL COMMENT '主键',
+  `id` varchar(36) NOT NULL COMMENT 'id',
   `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
   `create_time` datetime DEFAULT NULL COMMENT '创建日期',
   `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
@@ -2006,8 +2190,8 @@ CREATE TABLE `zn_prom_plan` (
   `sys_org_code` varchar(64) DEFAULT NULL COMMENT '所属部门',
   `planid` varchar(32) DEFAULT NULL COMMENT '促销计划编号',
   `planname` varchar(64) DEFAULT NULL COMMENT '促销计划名称',
-  `enddate` datetime DEFAULT NULL COMMENT '促销结束日期时间',
   `begindate` datetime DEFAULT NULL COMMENT '促销开始日期时间',
+  `enddate` datetime DEFAULT NULL COMMENT '促销结束日期时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -2016,14 +2200,15 @@ CREATE TABLE `zn_prom_plan` (
 -- ----------------------------
 DROP TABLE IF EXISTS `zn_prom_shop`;
 CREATE TABLE `zn_prom_shop` (
-  `id` varchar(36) NOT NULL,
+  `id` varchar(36) NOT NULL COMMENT '主键',
   `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
   `create_time` datetime DEFAULT NULL COMMENT '创建日期',
   `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
   `update_time` datetime DEFAULT NULL COMMENT '更新日期',
   `sys_org_code` varchar(64) DEFAULT NULL COMMENT '所属部门',
-  `serialid` varchar(32) DEFAULT NULL COMMENT '序号',
+  `serialid` varchar(36) DEFAULT NULL COMMENT '序号',
   `shopid` varchar(8) DEFAULT NULL COMMENT '门店编码',
+  `beizhu` varchar(32) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -2038,8 +2223,8 @@ CREATE TABLE `zn_refshop` (
   `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
   `update_time` datetime DEFAULT NULL COMMENT '更新日期',
   `sys_org_code` varchar(64) DEFAULT NULL COMMENT '所属部门',
-  `shopid` varchar(8) DEFAULT NULL COMMENT '门店编码',
-  `refshop` varchar(8) DEFAULT NULL COMMENT '参照门店编码',
+  `shopid` varchar(64) DEFAULT NULL COMMENT '门店编码',
+  `refshop` varchar(64) DEFAULT NULL COMMENT '参照门店编码',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -2049,12 +2234,84 @@ CREATE TABLE `zn_refshop` (
 DROP TABLE IF EXISTS `zn_season_across`;
 CREATE TABLE `zn_season_across` (
   `id` varchar(36) NOT NULL COMMENT '主键',
-  `shopid` varchar(8) DEFAULT NULL COMMENT '商品编码',
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+  `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新日期',
+  `sys_org_code` varchar(64) DEFAULT NULL COMMENT '所属部门',
+  `shopid` varchar(8) DEFAULT NULL COMMENT '商店编码',
   `goodsid` varchar(32) DEFAULT NULL COMMENT '商品编码',
-  `flag` varchar(1) DEFAULT NULL COMMENT '补货类型',
+  `firstdate` datetime DEFAULT NULL COMMENT '首次补货日期',
   `nextdate` datetime DEFAULT NULL COMMENT '下次补货日期',
-  `sdate` datetime DEFAULT NULL COMMENT '数据生成日期',
+  `begindate` datetime DEFAULT NULL COMMENT '季节开始日期',
   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Table structure for zn_season_goods
+-- ----------------------------
+DROP TABLE IF EXISTS `zn_season_goods`;
+CREATE TABLE `zn_season_goods` (
+  `id` varchar(36) NOT NULL,
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+  `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新日期',
+  `sys_org_code` varchar(64) DEFAULT NULL COMMENT '所属部门',
+  `shopid` varchar(8) DEFAULT NULL COMMENT '门店编码',
+  `goodsid` varchar(32) DEFAULT NULL COMMENT '商品编码',
+  `begindate` varchar(4) DEFAULT NULL COMMENT '季节开始日期',
+  `enddate` varchar(4) DEFAULT NULL COMMENT '季节结束日期',
+  `avg_qty_week` decimal(16,3) DEFAULT NULL COMMENT '每个门店每只单品在季节内的周销量的平均值',
+  `sdate` datetime DEFAULT NULL COMMENT '数据更新日期',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Table structure for zn_season_xl
+-- ----------------------------
+DROP TABLE IF EXISTS `zn_season_xl`;
+CREATE TABLE `zn_season_xl` (
+  `id` varchar(36) NOT NULL COMMENT '主键',
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+  `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新日期',
+  `sys_org_code` varchar(64) DEFAULT NULL COMMENT '所属部门',
+  `ywqid` varchar(8) DEFAULT NULL COMMENT '业务区标识',
+  `xlid` varchar(16) DEFAULT NULL COMMENT '小类编码',
+  `begindate` varchar(4) DEFAULT NULL COMMENT '季节开始日期',
+  `enddate` varchar(4) DEFAULT NULL COMMENT '季节结束日期',
+  `arrdate` varchar(4) DEFAULT NULL COMMENT '季节性商品起季是首次到货日期',
+  `rate1` decimal(16,2) DEFAULT NULL COMMENT '季节时间达到Period1，日均销量的折扣比例',
+  `rate2` decimal(16,2) DEFAULT NULL COMMENT '季节时间达到Period2，日均销量的折扣比例',
+  `period2` decimal(16,2) DEFAULT NULL COMMENT '季节时间达到的比例2',
+  `period1` decimal(16,2) DEFAULT NULL COMMENT '季节时间达到的比例1',
+  `sdate` datetime DEFAULT NULL COMMENT '数据更新日期',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `唯一值` (`ywqid`,`xlid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Table structure for zn_spring_xl
+-- ----------------------------
+DROP TABLE IF EXISTS `zn_spring_xl`;
+CREATE TABLE `zn_spring_xl` (
+  `id` varchar(36) NOT NULL COMMENT '主键',
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+  `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新日期',
+  `sys_org_code` varchar(64) DEFAULT NULL COMMENT '所属部门',
+  `ywqid` varchar(8) DEFAULT NULL COMMENT '业务区标识',
+  `holidayid` varchar(8) DEFAULT NULL COMMENT '节日代码',
+  `xlid` varchar(16) DEFAULT NULL COMMENT '小类编码',
+  `salevalue` decimal(16,2) DEFAULT NULL COMMENT '去年春节期间小类销售额',
+  `zs` decimal(16,2) DEFAULT NULL COMMENT '春节指数',
+  `rate` decimal(16,2) DEFAULT NULL COMMENT '节日安全系数',
+  `sdate` datetime DEFAULT NULL COMMENT '更新日期',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `唯一值` (`ywqid`,`holidayid`,`xlid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
@@ -2070,6 +2327,11 @@ CREATE TABLE `zn_xl_dms` (
   `dms_disc` decimal(16,3) DEFAULT NULL COMMENT '小类在disc1—disc2 折扣范围内的单品的日均销量',
   `dms_ori` decimal(16,3) DEFAULT NULL COMMENT '小类在原价销售时单品的日均销量',
   `sdate` datetime DEFAULT NULL COMMENT '本条记录更新或新增日期',
+  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+  `sys_org_code` varchar(64) DEFAULT NULL COMMENT '所属部门',
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新日期',
+  `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -2084,21 +2346,22 @@ CREATE TABLE `zv_cg_dl_zl_xl` (
   `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
   `update_time` datetime DEFAULT NULL COMMENT '更新日期',
   `sys_org_code` varchar(64) DEFAULT NULL COMMENT '所属部门',
-  `cgid` varchar(10) DEFAULT NULL COMMENT 'cgid',
-  `cgname` varchar(30) DEFAULT NULL COMMENT 'cgname',
-  `cg` varchar(40) DEFAULT NULL COMMENT 'cg',
-  `dlid` varchar(10) DEFAULT NULL COMMENT 'dlid',
-  `dlname` varchar(30) DEFAULT NULL COMMENT 'dlname',
-  `dl` varchar(40) DEFAULT NULL COMMENT 'dl',
-  `zlid` varchar(10) DEFAULT NULL COMMENT 'zlid',
-  `zlname` varchar(30) DEFAULT NULL COMMENT 'zlname',
-  `zl` varchar(40) DEFAULT NULL COMMENT 'zl',
-  `xlid` varchar(10) DEFAULT NULL COMMENT 'xlid',
-  `xlname` varchar(30) DEFAULT NULL COMMENT 'xlname',
-  `xl` varchar(40) DEFAULT NULL COMMENT 'xl',
+  `cgid` varchar(10) DEFAULT NULL COMMENT '采购类编码',
+  `cgname` varchar(30) DEFAULT NULL COMMENT '采购类名称',
+  `cg` varchar(40) DEFAULT NULL COMMENT '采购类',
+  `dlid` varchar(10) DEFAULT NULL COMMENT '大类编码',
+  `dlname` varchar(30) DEFAULT NULL COMMENT '大类名称',
+  `dl` varchar(40) DEFAULT NULL COMMENT '大类',
+  `zlid` varchar(10) DEFAULT NULL COMMENT '中类编码',
+  `zlname` varchar(30) DEFAULT NULL COMMENT '中类名称',
+  `zl` varchar(40) DEFAULT NULL COMMENT '中类',
+  `xlid` varchar(10) DEFAULT NULL COMMENT '小类编码',
+  `xlname` varchar(30) DEFAULT NULL COMMENT '小类名称',
+  `xl` varchar(40) DEFAULT NULL COMMENT '小类',
   `pdtjflag` int(10) NOT NULL DEFAULT '0' COMMENT 'pdtjflag',
   `qdhtj` int(10) NOT NULL DEFAULT '0' COMMENT 'qdhtj',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `index_name` (`xlid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -2106,24 +2369,27 @@ CREATE TABLE `zv_cg_dl_zl_xl` (
 -- ----------------------------
 DROP TABLE IF EXISTS `zv_goods`;
 CREATE TABLE `zv_goods` (
-  `id` varchar(36) NOT NULL COMMENT '主键',
+  `id` varchar(36) NOT NULL,
   `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
   `create_time` datetime DEFAULT NULL COMMENT '创建日期',
   `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
   `update_time` datetime DEFAULT NULL COMMENT '更新日期',
   `sys_org_code` varchar(64) DEFAULT NULL COMMENT '所属部门',
-  `goodsid` varchar(18) DEFAULT NULL COMMENT 'goodsid',
-  `barcodeid` varchar(18) DEFAULT NULL COMMENT 'barcodeid',
-  `deptid` varchar(10) DEFAULT NULL COMMENT 'deptid',
-  `name` varchar(60) DEFAULT NULL COMMENT 'name',
-  `flag` int(10) NOT NULL DEFAULT '0' COMMENT 'flag',
-  `status` varchar(2) NOT NULL DEFAULT ' ' COMMENT 'status',
-  `brand` varchar(8) DEFAULT NULL COMMENT 'brand',
-  `spec` varchar(40) DEFAULT NULL COMMENT 'spec',
-  `indate` varchar(27) DEFAULT NULL COMMENT 'indate',
-  `deleted` varchar(1) DEFAULT NULL COMMENT 'deleted',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `goodsid` varchar(16) DEFAULT NULL COMMENT '商品编码',
+  `barcodeid` varchar(16) DEFAULT NULL COMMENT '商品分类',
+  `deptid` varchar(16) DEFAULT NULL COMMENT '商品分类（小类）',
+  `name` varchar(64) DEFAULT NULL COMMENT '商品名称',
+  `flag` int(11) NOT NULL COMMENT '商品状态',
+  `status` varchar(32) NOT NULL COMMENT '商品状态名称',
+  `brand` varchar(8) DEFAULT NULL COMMENT '品牌',
+  `spec` varchar(64) DEFAULT NULL COMMENT '规格',
+  `indate` datetime DEFAULT NULL COMMENT '建档日期',
+  `deleted` varchar(1) DEFAULT NULL COMMENT '删除状态',
+  PRIMARY KEY (`id`),
+  KEY `index_name` (`goodsid`),
+  KEY `index_name1` (`brand`),
+  KEY `index_name2` (`deptid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Table structure for zv_goodsshop
@@ -2136,17 +2402,19 @@ CREATE TABLE `zv_goodsshop` (
   `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
   `update_time` datetime DEFAULT NULL COMMENT '更新日期',
   `sys_org_code` varchar(64) DEFAULT NULL COMMENT '所属部门',
-  `shopid` varchar(4) DEFAULT NULL COMMENT 'shopid',
-  `goodsid` varchar(18) DEFAULT NULL COMMENT 'goodsid',
-  `flag` int(10) DEFAULT NULL COMMENT 'flag',
-  `status` varchar(7) DEFAULT NULL COMMENT 'status',
-  `stocktype` int(10) DEFAULT NULL COMMENT 'stocktype',
-  `stocktypename` varchar(4) DEFAULT NULL COMMENT 'stocktypename',
+  `shopid` varchar(4) DEFAULT NULL COMMENT '商店编码',
+  `goodsid` varchar(18) DEFAULT NULL COMMENT '商品编码',
+  `flag` int(10) DEFAULT NULL COMMENT '商品状态编码',
+  `status` varchar(7) DEFAULT NULL COMMENT '商品状态名称',
+  `stocktype` int(10) DEFAULT NULL COMMENT '库存类型编码',
+  `stocktypename` varchar(4) DEFAULT NULL COMMENT '库存类型名称',
   `logistics` varchar(0) DEFAULT NULL COMMENT 'logistics',
-  `normalprice` double(22,0) DEFAULT NULL COMMENT 'normalprice',
-  `goodsdate` varchar(10) DEFAULT NULL COMMENT 'goodsdate',
-  `deleted` varchar(1) DEFAULT NULL COMMENT 'deleted',
-  PRIMARY KEY (`id`)
+  `normalprice` double(22,0) DEFAULT NULL COMMENT '正常价格',
+  `goodsdate` varchar(10) DEFAULT NULL COMMENT '建档时间',
+  `deleted` varchar(1) DEFAULT NULL COMMENT '删除状态',
+  PRIMARY KEY (`id`),
+  KEY `index_name` (`shopid`),
+  KEY `index_name1` (`goodsid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -2160,11 +2428,12 @@ CREATE TABLE `zv_minorder` (
   `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
   `update_time` datetime DEFAULT NULL COMMENT '更新日期',
   `sys_org_code` varchar(64) DEFAULT NULL COMMENT '所属部门',
-  `shopid` varchar(255) DEFAULT NULL COMMENT 'shopid',
-  `goodsid` varchar(18) DEFAULT NULL COMMENT 'goodsid',
-  `minorderqty` double(22,0) DEFAULT NULL COMMENT 'minorderqty',
-  `minstockqty` double(22,0) DEFAULT NULL COMMENT 'minstockqty',
-  PRIMARY KEY (`id`)
+  `shopid` varchar(255) DEFAULT NULL COMMENT '商店编码',
+  `goodsid` varchar(18) DEFAULT NULL COMMENT '商品编码',
+  `minorderqty` double(22,0) DEFAULT NULL COMMENT '最小订货量',
+  `minstockqty` double(22,0) DEFAULT NULL COMMENT '最小库存量',
+  PRIMARY KEY (`id`),
+  KEY `index_name` (`goodsid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -2178,9 +2447,36 @@ CREATE TABLE `zv_shopsstock` (
   `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
   `update_time` datetime DEFAULT NULL COMMENT '更新日期',
   `sys_org_code` varchar(64) DEFAULT NULL COMMENT '所属部门',
-  `shopid` varchar(4) DEFAULT NULL COMMENT 'shopid',
-  `goodsid` varchar(18) DEFAULT NULL COMMENT 'goodsid',
-  `qty` double(22,0) DEFAULT NULL COMMENT 'qty',
-  `costvalue` double(22,0) DEFAULT NULL COMMENT 'costvalue',
+  `shopid` varchar(4) DEFAULT NULL COMMENT '商店编码',
+  `goodsid` varchar(18) DEFAULT NULL COMMENT '商品编码',
+  `qty` double(16,2) DEFAULT NULL COMMENT '商品数量',
+  `costvalue` double(16,3) DEFAULT NULL COMMENT '商品成本',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- View structure for v_zv_minorder
+-- ----------------------------
+DROP VIEW IF EXISTS `v_zv_minorder`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_zv_minorder` AS select `b`.`name` AS `shopname`,`c`.`name` AS `goodsname`,`a`.`minorderqty` AS `minorderqty`,`a`.`minstockqty` AS `minstockqty` from ((`jeecg-boot`.`zv_minorder` `a` join (select `jeecg-boot`.`tb_organ`.`organ` AS `organ`,`jeecg-boot`.`tb_organ`.`name` AS `name` from `jeecg-boot`.`tb_organ`) `b` on((`a`.`shopid` = `b`.`organ`))) join (select `jeecg-boot`.`zv_goods`.`goodsid` AS `goodsid`,`jeecg-boot`.`zv_goods`.`name` AS `name` from `jeecg-boot`.`zv_goods`) `c` on((convert(`a`.`goodsid` using utf8mb4) = `c`.`goodsid`))) ;
+
+-- ----------------------------
+-- Procedure structure for sehshks_hsh
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `sehshks_hsh`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sehshks_hsh`()
+begin
+ UPDATE hhhahoa set hgjj='1';
+end
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Event structure for niupi
+-- ----------------------------
+DROP EVENT IF EXISTS `niupi`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` EVENT `niupi` ON SCHEDULE AT '2020-12-09 15:43:43' ON COMPLETION NOT PRESERVE ENABLE DO CALL sehshks_hsh()
+;;
+DELIMITER ;
