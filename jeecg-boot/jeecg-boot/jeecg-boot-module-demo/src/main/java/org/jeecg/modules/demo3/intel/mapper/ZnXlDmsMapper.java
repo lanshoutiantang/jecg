@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 /**
  * @Description: 小类折扣与销量
  * @Author: jeecg-boot
- * @Date:   2020-11-03
+ * @Date:   2020-11-19
  * @Version: V1.0
  */
 public interface ZnXlDmsMapper extends BaseMapper<ZnXlDms> {

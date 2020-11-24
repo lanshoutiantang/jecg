@@ -5,22 +5,53 @@
         <a-row>
           <a-col :span="24">
             <a-form-item label="业务区标识" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input v-decorator="['ywqid']" placeholder="请输入业务区标识"></a-input>
+              <j-dict-select-tag type="list" v-decorator="['ywqid']" :trigger-change="true" dictCode="city" placeholder="请选择业务区标识"/>
             </a-form-item>
           </a-col>
           <a-col :span="24">
             <a-form-item label="小类编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input v-decorator="['xlid']" placeholder="请输入小类编码"></a-input>
-            </a-form-item>
-          </a-col>
-          <a-col :span="24">
-            <a-form-item label="季节性商品分类" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input v-decorator="['seasontype']" placeholder="请输入季节性商品分类"></a-input>
+              <j-popup
+                v-decorator="['xlid']"
+                :trigger-change="true"
+                org-fields="xlname"
+                dest-fields="xlid"
+                code="zn_xlid"
+                @callback="popupCallback"/>
             </a-form-item>
           </a-col>
           <a-col :span="24">
             <a-form-item label="季节开始日期" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input v-decorator="['begindate']" placeholder="请输入季节开始日期"></a-input>
+              <a-input v-decorator="['begindate',validatorRules.code]" placeholder="请输入季节开始日期"></a-input>
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="季节结束日期" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input v-decorator="['enddate',validatorRules.code]" placeholder="请输入季节结束日期"></a-input>
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="季节性商品起季是首次到货日期" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input v-decorator="['arrdate']"  :disabled="isDisabledAuth('jie:bukebianji')" placeholder="请输入季节性商品起季是首次到货日期"></a-input>
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="季节开始与结束的中间周或日期具" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input-number v-decorator="['mweek']"  :disabled="isDisabledAuth('jie:bukebianji')" placeholder="请输入季节开始与结束的中间周或日期具" style="width: 100%"/>
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="季节内三年销量平均值" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input-number v-decorator="['mqty']"  :disabled="isDisabledAuth('jie:bukebianji')" placeholder="请输入季节内三年销量平均值" style="width: 100%"/>
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="季节下降点" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input-number v-decorator="['aweek']"  :disabled="isDisabledAuth('jie:bukebianji')" placeholder="请输入季节下降点" style="width: 100%"/>
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="季节下降点之后日均销量的折扣比例" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input v-decorator="['rate']" :disabled="isDisabledAuth('jie:bukebianji')" placeholder="请输入季节下降点之后日均销量的折扣比例"></a-input>
             </a-form-item>
           </a-col>
           <a-col v-if="showFlowSubmitButton" :span="24" style="text-align: center">
@@ -38,11 +69,15 @@
   import pick from 'lodash.pick'
   import { validateDuplicateValue } from '@/utils/util'
   import JFormContainer from '@/components/jeecg/JFormContainer'
+  import JDictSelectTag from "@/components/dict/JDictSelectTag"
+  import {disabledAuthFilter} from "../../../../utils/authFilter";
+  import {validateCheckRule} from "../../../../utils/util";
 
   export default {
     name: 'ZhSeasonXlForm',
     components: {
       JFormContainer,
+      JDictSelectTag,
     },
     props: {
       //流程表单data
@@ -78,6 +113,13 @@
         },
         confirmLoading: false,
         validatorRules: {
+            code: {
+                rules: [
+                    {required: true, message: '请输入编码'},
+                    // 如果想要更简洁，还可以缩写下面的参数名，只写首字母
+                    {validator: (r, v, c) => validateCheckRule('zn_mmdd', v, c)}
+                ]
+            }
         },
         url: {
           add: "/intel/zhSeasonXl/add",
@@ -110,6 +152,9 @@
       this.showFlowData();
     },
     methods: {
+        isDisabledAuth(code){
+            return disabledAuthFilter(code);
+        },
       add () {
         this.edit({});
       },
@@ -118,7 +163,7 @@
         this.model = Object.assign({}, record);
         this.visible = true;
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(this.model,'ywqid','xlid','seasontype','begindate'))
+          this.form.setFieldsValue(pick(this.model,'ywqid','xlid','begindate','enddate','arrdate','mweek','mqty','aweek','rate'))
         })
       },
       //渲染流程表单数据
@@ -164,7 +209,7 @@
         })
       },
       popupCallback(row){
-        this.form.setFieldsValue(pick(row,'ywqid','xlid','seasontype','begindate'))
+        this.form.setFieldsValue(pick(row,'ywqid','xlid','begindate','enddate','arrdate','mweek','mqty','aweek','rate'))
       },
     }
   }

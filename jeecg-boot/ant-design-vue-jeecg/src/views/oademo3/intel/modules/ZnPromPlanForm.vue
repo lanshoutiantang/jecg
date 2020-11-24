@@ -29,24 +29,24 @@
     </j-form-container>
       <!-- 子表单区域 -->
     <a-tabs v-model="activeKey" @change="handleChangeTabs">
-      <a-tab-pane tab="促销商品表" :key="refKeys[0]" :forceRender="true">
+      <a-tab-pane tab="促销门店表" :key="refKeys[0]" :forceRender="true">
         <j-editable-table
           :ref="refKeys[0]"
-          :loading="znPromGoodsTable.loading"
-          :columns="znPromGoodsTable.columns"
-          :dataSource="znPromGoodsTable.dataSource"
+          :loading="znPromShopTable.loading"
+          :columns="znPromShopTable.columns"
+          :dataSource="znPromShopTable.dataSource"
           :maxHeight="300"
           :disabled="formDisabled"
           :rowNumber="true"
           :rowSelection="true"
           :actionButton="true"/>
       </a-tab-pane>
-      <a-tab-pane tab="促销门店表" :key="refKeys[1]" :forceRender="true">
+      <a-tab-pane tab="促销商品表" :key="refKeys[1]" :forceRender="true">
         <j-editable-table
           :ref="refKeys[1]"
-          :loading="znPromShopTable.loading"
-          :columns="znPromShopTable.columns"
-          :dataSource="znPromShopTable.dataSource"
+          :loading="znPromGoodsTable.loading"
+          :columns="znPromGoodsTable.columns"
+          :dataSource="znPromGoodsTable.dataSource"
           :maxHeight="300"
           :disabled="formDisabled"
           :rowNumber="true"
@@ -96,14 +96,39 @@
         addDefaultRowNum: 1,
         validatorRules: {
         },
-        refKeys: ['znPromGoods', 'znPromShop', ],
-        tableKeys:['znPromGoods', 'znPromShop', ],
-        activeKey: 'znPromGoods',
+        refKeys: ['znPromShop', 'znPromGoods', ],
+        tableKeys:['znPromShop', 'znPromGoods', ],
+        activeKey: 'znPromShop',
+        // 促销门店表
+        znPromShopTable: {
+          loading: false,
+          dataSource: [],
+          columns: [
+
+            {
+              title: '门店编码',
+              key: 'shopid',
+              type: FormTypes.input,
+              width:"200px",
+              placeholder: '请输入${title}',
+              defaultValue: '',
+            },
+              {
+                  title: '备注',
+                  key: 'beizhu',
+                  type: FormTypes.input,
+                  width:"200px",
+                  placeholder: '请输入${title}',
+                  defaultValue: '',
+              },
+          ]
+        },
         // 促销商品表
         znPromGoodsTable: {
           loading: false,
           dataSource: [],
           columns: [
+
             {
               title: '商品编码',
               key: 'goodsid',
@@ -122,30 +147,15 @@
             },
           ]
         },
-        // 促销门店表
-        znPromShopTable: {
-          loading: false,
-          dataSource: [],
-          columns: [
-            {
-              title: '门店编码',
-              key: 'shopid',
-              type: FormTypes.input,
-              width:"200px",
-              placeholder: '请输入${title}',
-              defaultValue: '',
-            },
-          ]
-        },
         url: {
           add: "/intel/znPromPlan/add",
           edit: "/intel/znPromPlan/edit",
           queryById: "/intel/znPromPlan/queryById",
-          znPromGoods: {
-            list: '/intel/znPromPlan/queryZnPromGoodsByMainId'
-          },
           znPromShop: {
             list: '/intel/znPromPlan/queryZnPromShopByMainId'
+          },
+          znPromGoods: {
+            list: '/intel/znPromPlan/queryZnPromGoodsByMainId'
           },
         }
       }
@@ -196,8 +206,8 @@
     methods: {
       addBefore(){
         this.form.resetFields()
-        this.znPromGoodsTable.dataSource=[]
         this.znPromShopTable.dataSource=[]
+        this.znPromGoodsTable.dataSource=[]
       },
       getAllTable() {
         let values = this.tableKeys.map(key => getRefPromise(this, key))
@@ -212,8 +222,8 @@
         // 加载子表数据
         if (this.model.id) {
           let params = { id: this.model.id }
-          this.requestSubTableData(this.url.znPromGoods.list, params, this.znPromGoodsTable)
           this.requestSubTableData(this.url.znPromShop.list, params, this.znPromShopTable)
+          this.requestSubTableData(this.url.znPromGoods.list, params, this.znPromGoodsTable)
         }
       },
       /** 整理成formData */
@@ -221,8 +231,8 @@
         let main = Object.assign(this.model, allValues.formValue)
         return {
           ...main, // 展开
-          znPromGoodsList: allValues.tablesValue[0].values,
-          znPromShopList: allValues.tablesValue[1].values,
+          znPromShopList: allValues.tablesValue[0].values,
+          znPromGoodsList: allValues.tablesValue[1].values,
         }
       },
       //渲染流程表单数据

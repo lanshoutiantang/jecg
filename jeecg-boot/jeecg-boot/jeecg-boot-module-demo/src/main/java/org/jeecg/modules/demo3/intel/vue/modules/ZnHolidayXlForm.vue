@@ -18,6 +18,21 @@
               <a-input v-decorator="['xlid']" placeholder="请输入小类编码"></a-input>
             </a-form-item>
           </a-col>
+          <a-col :span="24">
+            <a-form-item label="去年小类销售额" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input-number v-decorator="['salevalue']" placeholder="请输入去年小类销售额" style="width: 100%"/>
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="春节指数" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input-number v-decorator="['zs']" placeholder="请输入春节指数" style="width: 100%"/>
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="节日安全系数" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input-number v-decorator="['rate']" placeholder="请输入节日安全系数" style="width: 100%"/>
+            </a-form-item>
+          </a-col>
           <a-col v-if="showFlowSubmitButton" :span="24" style="text-align: center">
             <a-button @click="submitForm">提 交</a-button>
           </a-col>
@@ -113,7 +128,7 @@
         this.model = Object.assign({}, record);
         this.visible = true;
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(this.model,'ywqid','holidayid','xlid'))
+          this.form.setFieldsValue(pick(this.model,'ywqid','holidayid','xlid','salevalue','zs','rate'))
         })
       },
       //渲染流程表单数据
@@ -159,7 +174,7 @@
         })
       },
       popupCallback(row){
-        this.form.setFieldsValue(pick(row,'ywqid','holidayid','xlid'))
+        this.form.setFieldsValue(pick(row,'ywqid','holidayid','xlid','salevalue','zs','rate'))
       },
     }
   }

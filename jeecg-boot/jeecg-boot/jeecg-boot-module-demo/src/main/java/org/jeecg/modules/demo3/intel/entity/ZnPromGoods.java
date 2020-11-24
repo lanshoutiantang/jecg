@@ -15,7 +15,7 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * @Description: 促销商品表
  * @Author: jeecg-boot
- * @Date:   2020-11-04
+ * @Date:   2020-11-18
  * @Version: V1.0
  */
 @ApiModel(value="zn_prom_plan对象", description="促销计划表")

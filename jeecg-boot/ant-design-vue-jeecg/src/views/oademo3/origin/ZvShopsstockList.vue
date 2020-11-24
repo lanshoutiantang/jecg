@@ -5,13 +5,14 @@
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="shopid">
-              <a-input placeholder="请输入shopid" v-model="queryParam.shopid"></a-input>
+            <a-form-item label="商店编码">
+              <j-popup placeholder="请选择商店编码" v-model="queryParam.shopid" code="zn_shopname" org-fields="shopname" dest-fields="shopid" :field="getPopupField('shopid')"/>
+<!--              <a-input placeholder="请输入商店编码" v-model="queryParam.shopid"></a-input>-->
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="goodsid">
-              <a-input placeholder="请输入goodsid" v-model="queryParam.goodsid"></a-input>
+            <a-form-item label="商品编码">
+              <a-input placeholder="请输入商品编码" v-model="queryParam.goodsid"></a-input>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
@@ -140,22 +141,22 @@
             }
           },
           {
-            title:'shopid',
+            title:'商店编码',
             align:"center",
             dataIndex: 'shopid'
           },
           {
-            title:'goodsid',
+            title:'商品编码',
             align:"center",
             dataIndex: 'goodsid'
           },
           {
-            title:'qty',
+            title:'商品数量',
             align:"center",
             dataIndex: 'qty'
           },
           {
-            title:'costvalue',
+            title:'商品成本',
             align:"center",
             dataIndex: 'costvalue'
           },

@@ -5,13 +5,13 @@
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="shopid">
-              <a-input placeholder="请输入shopid" v-model="queryParam.shopid"></a-input>
+            <a-form-item label="商店编码">
+              <a-input placeholder="请输入商店编码" v-model="queryParam.shopid"></a-input>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="goodsid">
-              <a-input placeholder="请输入goodsid" v-model="queryParam.goodsid"></a-input>
+            <a-form-item label="商品编码">
+              <a-input placeholder="请输入商品编码" v-model="queryParam.goodsid"></a-input>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
@@ -140,32 +140,32 @@
             }
           },
           {
-            title:'shopid',
+            title:'商店编码',
             align:"center",
             dataIndex: 'shopid'
           },
           {
-            title:'goodsid',
+            title:'商品编码',
             align:"center",
             dataIndex: 'goodsid'
           },
           {
-            title:'flag',
+            title:'商品状态编码',
             align:"center",
             dataIndex: 'flag'
           },
           {
-            title:'status',
+            title:'商品状态名称',
             align:"center",
             dataIndex: 'status'
           },
           {
-            title:'stocktype',
+            title:'库存类型编码',
             align:"center",
             dataIndex: 'stocktype'
           },
           {
-            title:'stocktypename',
+            title:'库存类型名称',
             align:"center",
             dataIndex: 'stocktypename'
           },
@@ -175,19 +175,19 @@
             dataIndex: 'logistics'
           },
           {
-            title:'normalprice',
+            title:'正常价格',
             align:"center",
             dataIndex: 'normalprice'
           },
           {
-            title:'goodsdate',
+            title:'建档时间',
             align:"center",
             dataIndex: 'goodsdate'
           },
           {
             title:'deleted',
             align:"center",
-            dataIndex: 'deleted'
+            dataIndex: '删除状态'
           },
           {
             title: '操作',

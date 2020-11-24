@@ -168,11 +168,6 @@
             }
           },
           {
-            title:'所属部门',
-            align:"center",
-            dataIndex: 'sysOrgCode'
-          },
-          {
             title:'促销计划编号',
             align:"center",
             dataIndex: 'planid'

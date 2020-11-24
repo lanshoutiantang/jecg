@@ -18,16 +18,16 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
- * @Description: 节日商品表
+ * @Description: 节日专属商品类别表
  * @Author: jeecg-boot
- * @Date:   2020-11-03
+ * @Date:   2020-11-22
  * @Version: V1.0
  */
 @Data
 @TableName("zn_holiday_xl")
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = false)
-@ApiModel(value="zn_holiday_xl对象", description="节日商品表")
+@ApiModel(value="zn_holiday_xl对象", description="节日专属商品类别表")
 public class ZnHolidayXl implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -56,6 +56,7 @@ public class ZnHolidayXl implements Serializable {
     private java.lang.String sysOrgCode;
 	/**业务区标识*/
 	@Excel(name = "业务区标识", width = 15)
+    @Dict(dicCode = "city")
     @ApiModelProperty(value = "业务区标识")
     private java.lang.String ywqid;
 	/**节日代码*/
@@ -66,4 +67,16 @@ public class ZnHolidayXl implements Serializable {
 	@Excel(name = "小类编码", width = 15)
     @ApiModelProperty(value = "小类编码")
     private java.lang.String xlid;
+	/**去年小类销售额*/
+	@Excel(name = "去年小类销售额", width = 15)
+    @ApiModelProperty(value = "去年小类销售额")
+    private java.math.BigDecimal salevalue;
+	/**春节指数*/
+	@Excel(name = "春节指数", width = 15)
+    @ApiModelProperty(value = "春节指数")
+    private java.math.BigDecimal zs;
+	/**节日安全系数*/
+	@Excel(name = "节日安全系数", width = 15)
+    @ApiModelProperty(value = "节日安全系数")
+    private java.math.BigDecimal rate;
 }

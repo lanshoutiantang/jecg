@@ -10,10 +10,17 @@
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="小类编码">
-              <a-input placeholder="请输入小类编码" v-model="queryParam.xlid"></a-input>
+            <a-form-item label="节日代码">
+              <a-input placeholder="请输入节日代码" v-model="queryParam.holidayid"></a-input>
             </a-form-item>
           </a-col>
+          <template v-if="toggleSearchStatus">
+            <a-col :xl="6" :lg="7" :md="8" :sm="24">
+              <a-form-item label="小类编码">
+                <a-input placeholder="请输入小类编码" v-model="queryParam.xlid"></a-input>
+              </a-form-item>
+            </a-col>
+          </template>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
               <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
@@ -32,7 +39,7 @@
     <!-- 操作按钮区域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary" icon="download" @click="handleExportXls('节日商品表')">导出</a-button>
+      <a-button type="primary" icon="download" @click="handleExportXls('节日专属商品类别表')">导出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
         <a-button type="primary" icon="import">导入</a-button>
       </a-upload>
@@ -117,6 +124,7 @@
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import ZnHolidayXlModal from './modules/ZnHolidayXlModal'
+  import {filterMultiDictText} from '@/components/dict/JDictSelectUtil'
 
   export default {
     name: 'ZnHolidayXlList',
@@ -126,7 +134,7 @@
     },
     data () {
       return {
-        description: '节日商品表管理页面',
+        description: '节日专属商品类别表管理页面',
         // 表头
         columns: [
           {
@@ -153,6 +161,21 @@
             title:'小类编码',
             align:"center",
             dataIndex: 'xlid'
+          },
+          {
+            title:'去年小类销售额',
+            align:"center",
+            dataIndex: 'salevalue'
+          },
+          {
+            title:'春节指数',
+            align:"center",
+            dataIndex: 'zs'
+          },
+          {
+            title:'节日安全系数',
+            align:"center",
+            dataIndex: 'rate'
           },
           {
             title: '操作',

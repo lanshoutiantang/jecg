@@ -22,13 +22,13 @@ import org.apache.shiro.SecurityUtils;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.system.query.QueryGenerator;
 import org.jeecg.common.util.oConvertUtils;
-import org.jeecg.modules.demo3.intel.entity.ZnPromGoods;
 import org.jeecg.modules.demo3.intel.entity.ZnPromShop;
+import org.jeecg.modules.demo3.intel.entity.ZnPromGoods;
 import org.jeecg.modules.demo3.intel.entity.ZnPromPlan;
 import org.jeecg.modules.demo3.intel.vo.ZnPromPlanPage;
 import org.jeecg.modules.demo3.intel.service.IZnPromPlanService;
-import org.jeecg.modules.demo3.intel.service.IZnPromGoodsService;
 import org.jeecg.modules.demo3.intel.service.IZnPromShopService;
+import org.jeecg.modules.demo3.intel.service.IZnPromGoodsService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -47,7 +47,7 @@ import org.jeecg.common.aspect.annotation.AutoLog;
  /**
  * @Description: 促销计划表
  * @Author: jeecg-boot
- * @Date:   2020-11-04
+ * @Date:   2020-11-18
  * @Version: V1.0
  */
 @Api(tags="促销计划表")
@@ -58,9 +58,9 @@ public class ZnPromPlanController {
 	@Autowired
 	private IZnPromPlanService znPromPlanService;
 	@Autowired
-	private IZnPromGoodsService znPromGoodsService;
-	@Autowired
 	private IZnPromShopService znPromShopService;
+	@Autowired
+	private IZnPromGoodsService znPromGoodsService;
 	
 	/**
 	 * 分页列表查询
@@ -96,7 +96,7 @@ public class ZnPromPlanController {
 	public Result<?> add(@RequestBody ZnPromPlanPage znPromPlanPage) {
 		ZnPromPlan znPromPlan = new ZnPromPlan();
 		BeanUtils.copyProperties(znPromPlanPage, znPromPlan);
-		znPromPlanService.saveMain(znPromPlan, znPromPlanPage.getZnPromGoodsList(),znPromPlanPage.getZnPromShopList());
+		znPromPlanService.saveMain(znPromPlan, znPromPlanPage.getZnPromShopList(),znPromPlanPage.getZnPromGoodsList());
 		return Result.OK("添加成功！");
 	}
 	
@@ -116,7 +116,7 @@ public class ZnPromPlanController {
 		if(znPromPlanEntity==null) {
 			return Result.error("未找到对应数据");
 		}
-		znPromPlanService.updateMain(znPromPlan, znPromPlanPage.getZnPromGoodsList(),znPromPlanPage.getZnPromShopList());
+		znPromPlanService.updateMain(znPromPlan, znPromPlanPage.getZnPromShopList(),znPromPlanPage.getZnPromGoodsList());
 		return Result.OK("编辑成功!");
 	}
 	
@@ -172,12 +172,12 @@ public class ZnPromPlanController {
 	 * @param id
 	 * @return
 	 */
-	@AutoLog(value = "促销商品表通过主表ID查询")
-	@ApiOperation(value="促销商品表主表ID查询", notes="促销商品表-通主表ID查询")
-	@GetMapping(value = "/queryZnPromGoodsByMainId")
-	public Result<?> queryZnPromGoodsListByMainId(@RequestParam(name="id",required=true) String id) {
-		List<ZnPromGoods> znPromGoodsList = znPromGoodsService.selectByMainId(id);
-		return Result.OK(znPromGoodsList);
+	@AutoLog(value = "促销门店表通过主表ID查询")
+	@ApiOperation(value="促销门店表主表ID查询", notes="促销门店表-通主表ID查询")
+	@GetMapping(value = "/queryZnPromShopByMainId")
+	public Result<?> queryZnPromShopListByMainId(@RequestParam(name="id",required=true) String id) {
+		List<ZnPromShop> znPromShopList = znPromShopService.selectByMainId(id);
+		return Result.OK(znPromShopList);
 	}
 	/**
 	 * 通过id查询
@@ -185,12 +185,12 @@ public class ZnPromPlanController {
 	 * @param id
 	 * @return
 	 */
-	@AutoLog(value = "促销门店表通过主表ID查询")
-	@ApiOperation(value="促销门店表主表ID查询", notes="促销门店表-通主表ID查询")
-	@GetMapping(value = "/queryZnPromShopByMainId")
-	public Result<?> queryZnPromShopListByMainId(@RequestParam(name="id",required=true) String id) {
-		List<ZnPromShop> znPromShopList = znPromShopService.selectByMainId(id);
-		return Result.OK(znPromShopList);
+	@AutoLog(value = "促销商品表通过主表ID查询")
+	@ApiOperation(value="促销商品表主表ID查询", notes="促销商品表-通主表ID查询")
+	@GetMapping(value = "/queryZnPromGoodsByMainId")
+	public Result<?> queryZnPromGoodsListByMainId(@RequestParam(name="id",required=true) String id) {
+		List<ZnPromGoods> znPromGoodsList = znPromGoodsService.selectByMainId(id);
+		return Result.OK(znPromGoodsList);
 	}
 
     /**
@@ -222,10 +222,10 @@ public class ZnPromPlanController {
       for (ZnPromPlan main : znPromPlanList) {
           ZnPromPlanPage vo = new ZnPromPlanPage();
           BeanUtils.copyProperties(main, vo);
-          List<ZnPromGoods> znPromGoodsList = znPromGoodsService.selectByMainId(main.getId());
-          vo.setZnPromGoodsList(znPromGoodsList);
           List<ZnPromShop> znPromShopList = znPromShopService.selectByMainId(main.getId());
           vo.setZnPromShopList(znPromShopList);
+          List<ZnPromGoods> znPromGoodsList = znPromGoodsService.selectByMainId(main.getId());
+          vo.setZnPromGoodsList(znPromGoodsList);
           pageList.add(vo);
       }
 
@@ -260,7 +260,7 @@ public class ZnPromPlanController {
               for (ZnPromPlanPage page : list) {
                   ZnPromPlan po = new ZnPromPlan();
                   BeanUtils.copyProperties(page, po);
-                  znPromPlanService.saveMain(po, page.getZnPromGoodsList(),page.getZnPromShopList());
+                  znPromPlanService.saveMain(po, page.getZnPromShopList(),page.getZnPromGoodsList());
               }
               return Result.OK("文件导入成功！数据行数:" + list.size());
           } catch (Exception e) {

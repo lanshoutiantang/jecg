@@ -56,18 +56,18 @@ public class ZvMinorder implements Serializable {
     private java.lang.String sysOrgCode;
 	/**shopid*/
 	@Excel(name = "shopid", width = 15)
-    @ApiModelProperty(value = "shopid")
+    @ApiModelProperty(value = "商店编码")
     private java.lang.String shopid;
 	/**goodsid*/
 	@Excel(name = "goodsid", width = 15)
-    @ApiModelProperty(value = "goodsid")
+    @ApiModelProperty(value = "商品编码")
     private java.lang.String goodsid;
 	/**minorderqty*/
 	@Excel(name = "minorderqty", width = 15)
-    @ApiModelProperty(value = "minorderqty")
+    @ApiModelProperty(value = "最小订货量")
     private java.lang.Double minorderqty;
 	/**minstockqty*/
 	@Excel(name = "minstockqty", width = 15)
-    @ApiModelProperty(value = "minstockqty")
+    @ApiModelProperty(value = "最小库存量")
     private java.lang.Double minstockqty;
 }

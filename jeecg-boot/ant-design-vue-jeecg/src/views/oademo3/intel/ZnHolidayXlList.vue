@@ -6,14 +6,24 @@
         <a-row :gutter="24">
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <a-form-item label="业务区标识">
-              <a-input placeholder="请输入业务区标识" v-model="queryParam.ywqid"></a-input>
+<!--              <a-input placeholder="请输入业务区标识" v-model="queryParam.ywqid"></a-input>-->
+              <j-dict-select-tag placeholder="请选择业务区标识" v-model="queryParam.ywqid" dictCode="city"/>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="小类编码">
-              <a-input placeholder="请输入小类编码" v-model="queryParam.xlid"></a-input>
+            <a-form-item label="节日代码">
+<!--              <a-input placeholder="请输入节日代码" v-model="queryParam.holidayid"></a-input>-->
+              <j-popup placeholder="请选择节日代码" v-model="queryParam.holidayid" code="zn_holidayname" org-fields="holidayname" dest-fields="holidayid" :field="getPopupField('holidayid')"/>
             </a-form-item>
           </a-col>
+          <template v-if="toggleSearchStatus">
+            <a-col :xl="6" :lg="7" :md="8" :sm="24">
+              <a-form-item label="小类编码">
+<!--                <a-input placeholder="请输入小类编码" v-model="queryParam.xlid"></a-input>-->
+                <j-popup placeholder="请选择小类编码" v-model="queryParam.xlid" code="zn_xlid" org-fields="xlname" dest-fields="xlid" :field="getPopupField('xlid')"/>
+              </a-form-item>
+            </a-col>
+          </template>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
               <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
@@ -32,15 +42,15 @@
     <!-- 操作按钮区域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" v-has="'jie:add'" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary" icon="download" v-has="'jie:download'" @click="handleExportXls('节日商品表')">导出</a-button>
+      <a-button type="primary" v-has="'jie:download'" icon="download" @click="handleExportXls('节日专属商品类别表')">导出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
-        <a-button type="primary" v-has="'jie:import'" icon="import">导入</a-button>
+        <a-button type="primary"  v-has="'jie:import'" icon="import">导入</a-button>
       </a-upload>
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay">
           <a-menu-item key="1" @click="batchDel"><a-icon type="delete"/>删除</a-menu-item>
         </a-menu>
-        <a-button  v-has="'jie:down'" style="margin-left: 8px"> 批量操作 <a-icon type="down" /></a-button>
+        <a-button v-has="'jie:down'" style="margin-left: 8px"> 批量操作 <a-icon type="down" /></a-button>
       </a-dropdown>
     </div>
 
@@ -86,7 +96,7 @@
         </template>
 
         <span slot="action" slot-scope="text, record">
-          <a  v-has="'jie:edit'" @click="handleEdit(record)">编辑</a>
+          <a v-has="'jie:edit'" @click="handleEdit(record)">编辑</a>
 
           <a-divider type="vertical" />
           <a-dropdown>
@@ -117,7 +127,7 @@
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import ZnHolidayXlModal from './modules/ZnHolidayXlModal'
-  import {colAuthFilter} from "../../../utils/authFilter";
+  import {filterMultiDictText} from '@/components/dict/JDictSelectUtil'
 
   export default {
     name: 'ZnHolidayXlList',
@@ -127,7 +137,7 @@
     },
     data () {
       return {
-        description: '节日商品表管理页面',
+        description: '节日专属商品类别表管理页面',
         // 表头
         columns: [
           {
@@ -140,20 +150,10 @@
               return parseInt(index)+1;
             }
           },
-            {
-                title:'写入时间',
-                align:"center",
-                dataIndex: 'createTime'
-            },
-            {
-                title:'最新时间',
-                align:"center",
-                dataIndex: 'updateTime'
-            },
           {
             title:'业务区标识',
             align:"center",
-            dataIndex: 'ywqid'
+            dataIndex: 'ywqid_dictText'
           },
           {
             title:'节日代码',
@@ -164,6 +164,21 @@
             title:'小类编码',
             align:"center",
             dataIndex: 'xlid'
+          },
+          {
+            title:'去年小类销售额',
+            align:"center",
+            dataIndex: 'salevalue'
+          },
+          {
+            title:'春节指数',
+            align:"center",
+            dataIndex: 'zs'
+          },
+          {
+            title:'节日安全系数',
+            align:"center",
+            dataIndex: 'rate'
           },
           {
             title: '操作',
@@ -186,11 +201,7 @@
       }
     },
     created() {
-          this.disableMixinCreated=true;
-          this.columns = colAuthFilter(this.columns,'jie:');
-          this.loadData();
-          this.initDictConfig();
-      },
+    },
     computed: {
       importExcelUrl: function(){
         return `${window._CONFIG['domianURL']}/${this.url.importExcelUrl}`;

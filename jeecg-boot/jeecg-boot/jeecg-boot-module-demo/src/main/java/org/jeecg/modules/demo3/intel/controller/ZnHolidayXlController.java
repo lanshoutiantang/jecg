@@ -37,12 +37,12 @@ import io.swagger.annotations.ApiOperation;
 import org.jeecg.common.aspect.annotation.AutoLog;
 
  /**
- * @Description: 节日商品表
+ * @Description: 节日专属商品类别表
  * @Author: jeecg-boot
- * @Date:   2020-11-03
+ * @Date:   2020-11-22
  * @Version: V1.0
  */
-@Api(tags="节日商品表")
+@Api(tags="节日专属商品类别表")
 @RestController
 @RequestMapping("/intel/znHolidayXl")
 @Slf4j
@@ -59,8 +59,8 @@ public class ZnHolidayXlController extends JeecgController<ZnHolidayXl, IZnHolid
 	 * @param req
 	 * @return
 	 */
-	@AutoLog(value = "节日商品表-分页列表查询")
-	@ApiOperation(value="节日商品表-分页列表查询", notes="节日商品表-分页列表查询")
+	@AutoLog(value = "节日专属商品类别表-分页列表查询")
+	@ApiOperation(value="节日专属商品类别表-分页列表查询", notes="节日专属商品类别表-分页列表查询")
 	@GetMapping(value = "/list")
 	public Result<?> queryPageList(ZnHolidayXl znHolidayXl,
 								   @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
@@ -78,8 +78,8 @@ public class ZnHolidayXlController extends JeecgController<ZnHolidayXl, IZnHolid
 	 * @param znHolidayXl
 	 * @return
 	 */
-	@AutoLog(value = "节日商品表-添加")
-	@ApiOperation(value="节日商品表-添加", notes="节日商品表-添加")
+	@AutoLog(value = "节日专属商品类别表-添加")
+	@ApiOperation(value="节日专属商品类别表-添加", notes="节日专属商品类别表-添加")
 	@PostMapping(value = "/add")
 	public Result<?> add(@RequestBody ZnHolidayXl znHolidayXl) {
 		znHolidayXlService.save(znHolidayXl);
@@ -92,8 +92,8 @@ public class ZnHolidayXlController extends JeecgController<ZnHolidayXl, IZnHolid
 	 * @param znHolidayXl
 	 * @return
 	 */
-	@AutoLog(value = "节日商品表-编辑")
-	@ApiOperation(value="节日商品表-编辑", notes="节日商品表-编辑")
+	@AutoLog(value = "节日专属商品类别表-编辑")
+	@ApiOperation(value="节日专属商品类别表-编辑", notes="节日专属商品类别表-编辑")
 	@PutMapping(value = "/edit")
 	public Result<?> edit(@RequestBody ZnHolidayXl znHolidayXl) {
 		znHolidayXlService.updateById(znHolidayXl);
@@ -106,8 +106,8 @@ public class ZnHolidayXlController extends JeecgController<ZnHolidayXl, IZnHolid
 	 * @param id
 	 * @return
 	 */
-	@AutoLog(value = "节日商品表-通过id删除")
-	@ApiOperation(value="节日商品表-通过id删除", notes="节日商品表-通过id删除")
+	@AutoLog(value = "节日专属商品类别表-通过id删除")
+	@ApiOperation(value="节日专属商品类别表-通过id删除", notes="节日专属商品类别表-通过id删除")
 	@DeleteMapping(value = "/delete")
 	public Result<?> delete(@RequestParam(name="id",required=true) String id) {
 		znHolidayXlService.removeById(id);
@@ -120,8 +120,8 @@ public class ZnHolidayXlController extends JeecgController<ZnHolidayXl, IZnHolid
 	 * @param ids
 	 * @return
 	 */
-	@AutoLog(value = "节日商品表-批量删除")
-	@ApiOperation(value="节日商品表-批量删除", notes="节日商品表-批量删除")
+	@AutoLog(value = "节日专属商品类别表-批量删除")
+	@ApiOperation(value="节日专属商品类别表-批量删除", notes="节日专属商品类别表-批量删除")
 	@DeleteMapping(value = "/deleteBatch")
 	public Result<?> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
 		this.znHolidayXlService.removeByIds(Arrays.asList(ids.split(",")));
@@ -134,8 +134,8 @@ public class ZnHolidayXlController extends JeecgController<ZnHolidayXl, IZnHolid
 	 * @param id
 	 * @return
 	 */
-	@AutoLog(value = "节日商品表-通过id查询")
-	@ApiOperation(value="节日商品表-通过id查询", notes="节日商品表-通过id查询")
+	@AutoLog(value = "节日专属商品类别表-通过id查询")
+	@ApiOperation(value="节日专属商品类别表-通过id查询", notes="节日专属商品类别表-通过id查询")
 	@GetMapping(value = "/queryById")
 	public Result<?> queryById(@RequestParam(name="id",required=true) String id) {
 		ZnHolidayXl znHolidayXl = znHolidayXlService.getById(id);
@@ -153,7 +153,7 @@ public class ZnHolidayXlController extends JeecgController<ZnHolidayXl, IZnHolid
     */
     @RequestMapping(value = "/exportXls")
     public ModelAndView exportXls(HttpServletRequest request, ZnHolidayXl znHolidayXl) {
-        return super.exportXls(request, znHolidayXl, ZnHolidayXl.class, "节日商品表");
+        return super.exportXls(request, znHolidayXl, ZnHolidayXl.class, "节日专属商品类别表");
     }
 
     /**

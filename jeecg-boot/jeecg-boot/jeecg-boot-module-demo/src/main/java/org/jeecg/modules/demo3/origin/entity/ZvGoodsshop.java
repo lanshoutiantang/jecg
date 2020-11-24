@@ -56,27 +56,27 @@ public class ZvGoodsshop implements Serializable {
     private java.lang.String sysOrgCode;
 	/**shopid*/
 	@Excel(name = "shopid", width = 15)
-    @ApiModelProperty(value = "shopid")
+    @ApiModelProperty(value = "商店编码")
     private java.lang.String shopid;
 	/**goodsid*/
 	@Excel(name = "goodsid", width = 15)
-    @ApiModelProperty(value = "goodsid")
+    @ApiModelProperty(value = "商品编码")
     private java.lang.String goodsid;
 	/**flag*/
 	@Excel(name = "flag", width = 15)
-    @ApiModelProperty(value = "flag")
+    @ApiModelProperty(value = "商品状态编码")
     private java.lang.Integer flag;
 	/**status*/
 	@Excel(name = "status", width = 15)
-    @ApiModelProperty(value = "status")
+    @ApiModelProperty(value = "商品状态名称")
     private java.lang.String status;
 	/**stocktype*/
 	@Excel(name = "stocktype", width = 15)
-    @ApiModelProperty(value = "stocktype")
+    @ApiModelProperty(value = "库存类型编码")
     private java.lang.Integer stocktype;
 	/**stocktypename*/
 	@Excel(name = "stocktypename", width = 15)
-    @ApiModelProperty(value = "stocktypename")
+    @ApiModelProperty(value = "库存类型名称")
     private java.lang.String stocktypename;
 	/**logistics*/
 	@Excel(name = "logistics", width = 15)
@@ -84,14 +84,14 @@ public class ZvGoodsshop implements Serializable {
     private java.lang.String logistics;
 	/**normalprice*/
 	@Excel(name = "normalprice", width = 15)
-    @ApiModelProperty(value = "normalprice")
+    @ApiModelProperty(value = "正常价格")
     private java.lang.Double normalprice;
 	/**goodsdate*/
 	@Excel(name = "goodsdate", width = 15)
-    @ApiModelProperty(value = "goodsdate")
+    @ApiModelProperty(value = "建档时间")
     private java.lang.String goodsdate;
 	/**deleted*/
 	@Excel(name = "deleted", width = 15)
-    @ApiModelProperty(value = "deleted")
+    @ApiModelProperty(value = "删除状态")
     private java.lang.String deleted;
 }

@@ -5,24 +5,19 @@
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="goodsid">
-              <a-input placeholder="请输入goodsid" v-model="queryParam.goodsid"></a-input>
+            <a-form-item label="商品编码">
+              <a-input placeholder="请输入商品编码" v-model="queryParam.goodsid"></a-input>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="barcodeid">
-              <a-input placeholder="请输入barcodeid" v-model="queryParam.barcodeid"></a-input>
+            <a-form-item label="商品分类（小类）">
+              <a-input placeholder="请输入商品分类（小类）" v-model="queryParam.deptid"></a-input>
             </a-form-item>
           </a-col>
           <template v-if="toggleSearchStatus">
             <a-col :xl="6" :lg="7" :md="8" :sm="24">
-              <a-form-item label="deptid">
-                <a-input placeholder="请输入deptid" v-model="queryParam.deptid"></a-input>
-              </a-form-item>
-            </a-col>
-            <a-col :xl="6" :lg="7" :md="8" :sm="24">
-              <a-form-item label="name">
-                <a-input placeholder="请输入name" v-model="queryParam.name"></a-input>
+              <a-form-item label="商品名称">
+                <a-input placeholder="请输入商品名称" v-model="queryParam.name"></a-input>
               </a-form-item>
             </a-col>
           </template>
@@ -152,52 +147,55 @@
             }
           },
           {
-            title:'goodsid',
+            title:'商品编码',
             align:"center",
             dataIndex: 'goodsid'
           },
           {
-            title:'barcodeid',
+            title:'商品分类',
             align:"center",
             dataIndex: 'barcodeid'
           },
           {
-            title:'deptid',
+            title:'商品分类（小类）',
             align:"center",
             dataIndex: 'deptid'
           },
           {
-            title:'name',
+            title:'商品名称',
             align:"center",
             dataIndex: 'name'
           },
           {
-            title:'flag',
+            title:'商品状态',
             align:"center",
             dataIndex: 'flag'
           },
           {
-            title:'status',
+            title:'商品状态名称',
             align:"center",
             dataIndex: 'status'
           },
           {
-            title:'brand',
+            title:'品牌',
             align:"center",
             dataIndex: 'brand'
           },
           {
-            title:'spec',
+            title:'规格',
             align:"center",
             dataIndex: 'spec'
           },
           {
-            title:'indate',
+            title:'建档日期',
             align:"center",
-            dataIndex: 'indate'
+            dataIndex: 'indate',
+            customRender:function (text) {
+              return !text?"":(text.length>10?text.substr(0,10):text)
+            }
           },
           {
-            title:'deleted',
+            title:'删除状态',
             align:"center",
             dataIndex: 'deleted'
           },

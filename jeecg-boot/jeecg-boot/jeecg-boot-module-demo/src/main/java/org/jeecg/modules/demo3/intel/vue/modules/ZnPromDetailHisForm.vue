@@ -4,11 +4,6 @@
       <a-form :form="form" slot="detail">
         <a-row>
           <a-col :span="24">
-            <a-form-item label="所属部门" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input v-decorator="['sysOrgCode']" placeholder="请输入所属部门"></a-input>
-            </a-form-item>
-          </a-col>
-          <a-col :span="24">
             <a-form-item label="促销计划编号" :labelCol="labelCol" :wrapperCol="wrapperCol">
               <a-input v-decorator="['planid']" placeholder="请输入促销计划编号"></a-input>
             </a-form-item>
@@ -155,7 +150,7 @@
         this.model = Object.assign({}, record);
         this.visible = true;
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(this.model,'sysOrgCode','planid','planname','begindate','enddate','shopid','goodsid','price','planqty','flag','sdate'))
+          this.form.setFieldsValue(pick(this.model,'planid','planname','begindate','enddate','shopid','goodsid','price','planqty','flag','sdate'))
         })
       },
       //渲染流程表单数据
@@ -201,7 +196,7 @@
         })
       },
       popupCallback(row){
-        this.form.setFieldsValue(pick(row,'sysOrgCode','planid','planname','begindate','enddate','shopid','goodsid','price','planqty','flag','sdate'))
+        this.form.setFieldsValue(pick(row,'planid','planname','begindate','enddate','shopid','goodsid','price','planqty','flag','sdate'))
       },
     }
   }

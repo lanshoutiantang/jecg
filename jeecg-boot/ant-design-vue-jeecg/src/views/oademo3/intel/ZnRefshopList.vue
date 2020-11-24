@@ -6,12 +6,14 @@
         <a-row :gutter="24">
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <a-form-item label="门店编码">
-              <a-input placeholder="请输入门店编码" v-model="queryParam.shopid"></a-input>
+<!--              <a-input placeholder="请输入门店编码" v-model="queryParam.shopid"></a-input>-->
+              <j-popup placeholder="请选择门店编码" v-model="queryParam.shopid" code="zn_shopname" org-fields="shopname" dest-fields="shopid" :field="getPopupField('shopid')"/>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <a-form-item label="参照门店编码">
-              <a-input placeholder="请输入参照门店编码" v-model="queryParam.refshop"></a-input>
+<!--              <a-input placeholder="请输入参照门店编码" v-model="queryParam.refshop"></a-input>-->
+              <j-popup placeholder="请选择参照门店编码" v-model="queryParam.refshop" code="zn_shopname" org-fields="shopname" dest-fields="refshop" :field="getPopupField('refshop')"/>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
@@ -31,16 +33,16 @@
 
     <!-- 操作按钮区域 -->
     <div class="table-operator">
-      <a-button @click="handleAdd" v-has="'others:add'" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary" v-has="'others:download'" icon="download" @click="handleExportXls('参考门店')">导出</a-button>
+      <a-button @click="handleAdd" v-has="'refshop:add'" type="primary" icon="plus">新增</a-button>
+      <a-button type="primary" v-has="'refshop:download'" icon="download" @click="handleExportXls('参考门店')">导出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
-        <a-button type="primary" v-has="'others:import'" icon="import">导入</a-button>
+        <a-button type="primary" v-has="'refshop:import'" icon="import">导入</a-button>
       </a-upload>
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay">
           <a-menu-item key="1" @click="batchDel"><a-icon type="delete"/>删除</a-menu-item>
         </a-menu>
-        <a-button v-has="'others:down'" style="margin-left: 8px"> 批量操作 <a-icon type="down" /></a-button>
+        <a-button v-has="'refshop:down'" style="margin-left: 8px"> 批量操作 <a-icon type="down" /></a-button>
       </a-dropdown>
     </div>
 
@@ -86,7 +88,7 @@
         </template>
 
         <span slot="action" slot-scope="text, record">
-          <a v-has="'others:edit'" @click="handleEdit(record)">编辑</a>
+          <a v-has="'refshop:edit'" @click="handleEdit(record)">编辑</a>
 
           <a-divider type="vertical" />
           <a-dropdown>
@@ -97,7 +99,7 @@
               </a-menu-item>
               <a-menu-item>
                 <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
-                  <a v-has="'others:delete'">删除</a>
+                  <a v-has="'refshop:delete'">删除</a>
                 </a-popconfirm>
               </a-menu-item>
             </a-menu>

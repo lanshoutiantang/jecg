@@ -6,18 +6,23 @@
         <a-row :gutter="24">
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <a-form-item label="业务区标识">
-              <a-input placeholder="请输入业务区标识" v-model="queryParam.ywqid"></a-input>
+              <j-dict-select-tag placeholder="请选择业务区标识" v-model="queryParam.ywqid" dictCode="city"/>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <a-form-item label="小类编码">
-              <a-input placeholder="请输入小类编码" v-model="queryParam.xlid"></a-input>
+              <j-popup placeholder="请选择小类编码" v-model="queryParam.xlid" code="zn_xlid" org-fields="xlname" dest-fields="xlid" :field="getPopupField('xlid')"/>
             </a-form-item>
           </a-col>
           <template v-if="toggleSearchStatus">
             <a-col :xl="6" :lg="7" :md="8" :sm="24">
-              <a-form-item label="季节性商品分类">
-                <a-input placeholder="请输入季节性商品分类" v-model="queryParam.seasontype"></a-input>
+              <a-form-item label="季节开始日期">
+                <a-input placeholder="请输入季节开始日期" v-model="queryParam.begindate"></a-input>
+              </a-form-item>
+            </a-col>
+            <a-col :xl="6" :lg="7" :md="8" :sm="24">
+              <a-form-item label="季节结束日期">
+                <a-input placeholder="请输入季节结束日期" v-model="queryParam.enddate"></a-input>
               </a-form-item>
             </a-col>
           </template>
@@ -39,7 +44,7 @@
     <!-- 操作按钮区域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" v-has="'jie:add'" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary"  v-has="'jie:download'" icon="download" @click="handleExportXls('季节性商品')">导出</a-button>
+      <a-button type="primary" icon="download" v-has="'jie:download'" @click="handleExportXls('季节性商品')">导出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
         <a-button type="primary" v-has="'jie:import'" icon="import">导入</a-button>
       </a-upload>
@@ -47,7 +52,7 @@
         <a-menu slot="overlay">
           <a-menu-item key="1" @click="batchDel"><a-icon type="delete"/>删除</a-menu-item>
         </a-menu>
-        <a-button  v-has="'jie:down'" style="margin-left: 8px"> 批量操作 <a-icon type="down" /></a-button>
+        <a-button v-has="'jie:down'" style="margin-left: 8px"> 批量操作 <a-icon type="down" /></a-button>
       </a-dropdown>
     </div>
 
@@ -93,7 +98,7 @@
         </template>
 
         <span slot="action" slot-scope="text, record">
-          <a v-has="'jie:edit'"  @click="handleEdit(record)">编辑</a>
+          <a v-has="'jie:edit'" @click="handleEdit(record)">编辑</a>
 
           <a-divider type="vertical" />
           <a-dropdown>
@@ -124,12 +129,14 @@
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import ZhSeasonXlModal from './modules/ZhSeasonXlModal'
-  import {colAuthFilter} from "../../../utils/authFilter";
+  import JDictSelectTag from '@/components/dict/JDictSelectTag.vue'
+  import {filterMultiDictText} from '@/components/dict/JDictSelectUtil'
 
   export default {
     name: 'ZhSeasonXlList',
     mixins:[JeecgListMixin, mixinDevice],
     components: {
+      JDictSelectTag,
       ZhSeasonXlModal
     },
     data () {
@@ -147,20 +154,10 @@
               return parseInt(index)+1;
             }
           },
-            {
-                title:'写入时间',
-                align:"center",
-                dataIndex: 'createTime'
-            },
-            {
-                title:'最新时间',
-                align:"center",
-                dataIndex: 'updateTime'
-            },
           {
             title:'业务区标识',
             align:"center",
-            dataIndex: 'ywqid'
+            dataIndex: 'ywqid_dictText'
           },
           {
             title:'小类编码',
@@ -168,14 +165,39 @@
             dataIndex: 'xlid'
           },
           {
-            title:'季节性商品分类',
-            align:"center",
-            dataIndex: 'seasontype'
-          },
-          {
             title:'季节开始日期',
             align:"center",
             dataIndex: 'begindate'
+          },
+          {
+            title:'季节结束日期',
+            align:"center",
+            dataIndex: 'enddate'
+          },
+          {
+            title:'季节性商品起季是首次到货日期',
+            align:"center",
+            dataIndex: 'arrdate'
+          },
+          {
+            title:'季节开始与结束的中间周或日期具',
+            align:"center",
+            dataIndex: 'mweek'
+          },
+          {
+            title:'季节内三年销量平均值',
+            align:"center",
+            dataIndex: 'mqty'
+          },
+          {
+            title:'季节下降点',
+            align:"center",
+            dataIndex: 'aweek'
+          },
+          {
+            title:'季节下降点之后日均销量的折扣比例',
+            align:"center",
+            dataIndex: 'rate'
           },
           {
             title: '操作',
@@ -197,11 +219,7 @@
         dictOptions:{},
       }
     },
-    created()  {
-        this.disableMixinCreated=true;
-        this.columns = colAuthFilter(this.columns,'jie:');
-        this.loadData();
-        this.initDictConfig();
+    created() {
     },
     computed: {
       importExcelUrl: function(){

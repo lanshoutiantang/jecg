@@ -5,7 +5,14 @@
         <a-row>
           <a-col :span="24">
             <a-form-item label="shopid" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input v-decorator="['shopid']" placeholder="请输入shopid"></a-input>
+<!--              <a-input v-decorator="['shopid']" placeholder="请输入shopid"></a-input>-->
+              <j-popup
+                v-decorator="['shopid']"
+                :trigger-change="true"
+                org-fields="shopname"
+                dest-fields="shopid"
+                code="zn_shopname  "
+                @callback="popupCallback"/>
             </a-form-item>
           </a-col>
           <a-col :span="24">

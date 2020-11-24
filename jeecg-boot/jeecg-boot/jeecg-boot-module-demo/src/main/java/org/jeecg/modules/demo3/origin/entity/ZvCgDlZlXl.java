@@ -56,51 +56,51 @@ public class ZvCgDlZlXl implements Serializable {
     private java.lang.String sysOrgCode;
 	/**cgid*/
 	@Excel(name = "cgid", width = 15)
-    @ApiModelProperty(value = "cgid")
+    @ApiModelProperty(value = "采购类编码")
     private java.lang.String cgid;
 	/**cgname*/
 	@Excel(name = "cgname", width = 15)
-    @ApiModelProperty(value = "cgname")
+    @ApiModelProperty(value = "采购类名称")
     private java.lang.String cgname;
 	/**cg*/
 	@Excel(name = "cg", width = 15)
-    @ApiModelProperty(value = "cg")
+    @ApiModelProperty(value = "采购类")
     private java.lang.String cg;
 	/**dlid*/
 	@Excel(name = "dlid", width = 15)
-    @ApiModelProperty(value = "dlid")
+    @ApiModelProperty(value = "大类编码")
     private java.lang.String dlid;
 	/**dlname*/
 	@Excel(name = "dlname", width = 15)
-    @ApiModelProperty(value = "dlname")
+    @ApiModelProperty(value = "大类名称")
     private java.lang.String dlname;
 	/**dl*/
 	@Excel(name = "dl", width = 15)
-    @ApiModelProperty(value = "dl")
+    @ApiModelProperty(value = "大类")
     private java.lang.String dl;
 	/**zlid*/
 	@Excel(name = "zlid", width = 15)
-    @ApiModelProperty(value = "zlid")
+    @ApiModelProperty(value = "中类编码")
     private java.lang.String zlid;
 	/**zlname*/
 	@Excel(name = "zlname", width = 15)
-    @ApiModelProperty(value = "zlname")
+    @ApiModelProperty(value = "中类名称")
     private java.lang.String zlname;
 	/**zl*/
 	@Excel(name = "zl", width = 15)
-    @ApiModelProperty(value = "zl")
+    @ApiModelProperty(value = "中类")
     private java.lang.String zl;
 	/**xlid*/
 	@Excel(name = "xlid", width = 15)
-    @ApiModelProperty(value = "xlid")
+    @ApiModelProperty(value = "小类编码")
     private java.lang.String xlid;
 	/**xlname*/
 	@Excel(name = "xlname", width = 15)
-    @ApiModelProperty(value = "xlname")
+    @ApiModelProperty(value = "小类名称")
     private java.lang.String xlname;
 	/**xl*/
 	@Excel(name = "xl", width = 15)
-    @ApiModelProperty(value = "xl")
+    @ApiModelProperty(value = "小类")
     private java.lang.String xl;
 	/**pdtjflag*/
 	@Excel(name = "pdtjflag", width = 15)

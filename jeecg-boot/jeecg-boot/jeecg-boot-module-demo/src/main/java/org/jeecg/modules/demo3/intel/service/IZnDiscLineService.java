@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
  * @Description: 折扣比例分界线
  * @Author: jeecg-boot
- * @Date:   2020-11-03
+ * @Date:   2020-11-19
  * @Version: V1.0
  */
 public interface IZnDiscLineService extends IService<ZnDiscLine> {

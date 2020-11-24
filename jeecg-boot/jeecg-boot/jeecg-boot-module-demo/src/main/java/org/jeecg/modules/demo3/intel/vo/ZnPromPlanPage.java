@@ -2,8 +2,8 @@ package org.jeecg.modules.demo3.intel.vo;
 
 import java.util.List;
 import org.jeecg.modules.demo3.intel.entity.ZnPromPlan;
-import org.jeecg.modules.demo3.intel.entity.ZnPromGoods;
 import org.jeecg.modules.demo3.intel.entity.ZnPromShop;
+import org.jeecg.modules.demo3.intel.entity.ZnPromGoods;
 import lombok.Data;
 import org.jeecgframework.poi.excel.annotation.Excel;
 import org.jeecgframework.poi.excel.annotation.ExcelEntity;
@@ -18,7 +18,7 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * @Description: 促销计划表
  * @Author: jeecg-boot
- * @Date:   2020-11-04
+ * @Date:   2020-11-18
  * @Version: V1.0
  */
 @Data
@@ -68,11 +68,11 @@ public class ZnPromPlanPage {
 	@ApiModelProperty(value = "促销结束日期时间")
 	private java.util.Date enddate;
 
-	@ExcelCollection(name="促销商品表")
-	@ApiModelProperty(value = "促销商品表")
-	private List<ZnPromGoods> znPromGoodsList;
 	@ExcelCollection(name="促销门店表")
 	@ApiModelProperty(value = "促销门店表")
 	private List<ZnPromShop> znPromShopList;
+	@ExcelCollection(name="促销商品表")
+	@ApiModelProperty(value = "促销商品表")
+	private List<ZnPromGoods> znPromGoodsList;
 
 }

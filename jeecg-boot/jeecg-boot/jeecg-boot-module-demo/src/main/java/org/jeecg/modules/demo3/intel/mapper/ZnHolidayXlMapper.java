@@ -7,9 +7,9 @@ import org.jeecg.modules.demo3.intel.entity.ZnHolidayXl;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
- * @Description: 节日商品表
+ * @Description: 节日专属商品类别表
  * @Author: jeecg-boot
- * @Date:   2020-11-03
+ * @Date:   2020-11-22
  * @Version: V1.0
  */
 public interface ZnHolidayXlMapper extends BaseMapper<ZnHolidayXl> {

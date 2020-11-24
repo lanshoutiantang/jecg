@@ -5,17 +5,47 @@
         <a-row>
           <a-col :span="24">
             <a-form-item label="业务区标识" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input v-decorator="['ywqid']" placeholder="请输入业务区标识"></a-input>
+<!--              <a-input v-decorator="['ywqid']" placeholder="请输入业务区标识"></a-input>-->
+              <j-dict-select-tag type="list" v-decorator="['ywqid']" :trigger-change="true" dictCode="city" placeholder="请选择业务区标识"/>
             </a-form-item>
           </a-col>
           <a-col :span="24">
             <a-form-item label="节日代码" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input v-decorator="['holidayid']" placeholder="请输入节日代码"></a-input>
+<!--              <a-input v-decorator="['holidayid']" placeholder="请输入节日代码"></a-input>-->
+              <j-popup
+                v-decorator="['holidayid']"
+                :trigger-change="false"
+                org-fields="holidayname"
+                dest-fields="holidayid"
+                code="zn_holidayname"
+                @callback="popupCallback"/>
             </a-form-item>
           </a-col>
           <a-col :span="24">
             <a-form-item label="小类编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input v-decorator="['xlid']" placeholder="请输入小类编码"></a-input>
+<!--              <a-input v-decorator="['xlid']" placeholder="请输入小类编码"></a-input>-->
+              <j-popup
+                v-decorator="['xlid']"
+                :trigger-change="true"
+                org-fields="xlname"
+                dest-fields="xlid"
+                code="zn_xlid"
+                @callback="popupCallback"/>
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="去年小类销售额" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input-number v-decorator="['salevalue']" placeholder="请输入去年小类销售额" style="width: 100%"/>
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="春节指数" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input-number v-decorator="['zs']" placeholder="请输入春节指数" style="width: 100%"/>
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="节日安全系数" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input-number v-decorator="['rate']" placeholder="请输入节日安全系数" style="width: 100%"/>
             </a-form-item>
           </a-col>
           <a-col v-if="showFlowSubmitButton" :span="24" style="text-align: center">
@@ -113,7 +143,7 @@
         this.model = Object.assign({}, record);
         this.visible = true;
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(this.model,'ywqid','holidayid','xlid'))
+          this.form.setFieldsValue(pick(this.model,'ywqid','holidayid','xlid','salevalue','zs','rate'))
         })
       },
       //渲染流程表单数据
@@ -159,7 +189,7 @@
         })
       },
       popupCallback(row){
-        this.form.setFieldsValue(pick(row,'ywqid','holidayid','xlid'))
+        this.form.setFieldsValue(pick(row,'ywqid','holidayid','xlid','salevalue','zs','rate'))
       },
     }
   }

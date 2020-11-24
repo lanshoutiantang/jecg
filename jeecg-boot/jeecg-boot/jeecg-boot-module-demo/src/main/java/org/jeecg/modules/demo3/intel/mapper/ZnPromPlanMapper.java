@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 /**
  * @Description: 促销计划表
  * @Author: jeecg-boot
- * @Date:   2020-11-04
+ * @Date:   2020-11-18
  * @Version: V1.0
  */
 public interface ZnPromPlanMapper extends BaseMapper<ZnPromPlan> {

@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 /**
  * @Description: 补货参数
  * @Author: jeecg-boot
- * @Date:   2020-11-03
+ * @Date:   2020-11-19
  * @Version: V1.0
  */
 public interface ZnConfigMapper extends BaseMapper<ZnConfig> {

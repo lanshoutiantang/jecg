@@ -39,7 +39,7 @@ import org.jeecg.common.aspect.annotation.AutoLog;
  /**
  * @Description: 季节性商品
  * @Author: jeecg-boot
- * @Date:   2020-11-03
+ * @Date:   2020-11-12
  * @Version: V1.0
  */
 @Api(tags="季节性商品")

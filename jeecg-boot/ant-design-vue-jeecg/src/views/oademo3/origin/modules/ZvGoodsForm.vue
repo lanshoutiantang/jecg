@@ -4,53 +4,53 @@
       <a-form :form="form" slot="detail">
         <a-row>
           <a-col :span="24">
-            <a-form-item label="goodsid" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input v-decorator="['goodsid']" placeholder="请输入goodsid"></a-input>
+            <a-form-item label="商品编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input v-decorator="['goodsid']" placeholder="请输入商品编码"></a-input>
             </a-form-item>
           </a-col>
           <a-col :span="24">
-            <a-form-item label="barcodeid" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input v-decorator="['barcodeid']" placeholder="请输入barcodeid"></a-input>
+            <a-form-item label="商品分类" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input v-decorator="['barcodeid']" placeholder="请输入商品分类"></a-input>
             </a-form-item>
           </a-col>
           <a-col :span="24">
-            <a-form-item label="deptid" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input v-decorator="['deptid']" placeholder="请输入deptid"></a-input>
+            <a-form-item label="商品分类（小类）" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input v-decorator="['deptid']" placeholder="请输入商品分类（小类）"></a-input>
             </a-form-item>
           </a-col>
           <a-col :span="24">
-            <a-form-item label="name" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input v-decorator="['name']" placeholder="请输入name"></a-input>
+            <a-form-item label="商品名称" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input v-decorator="['name']" placeholder="请输入商品名称"></a-input>
             </a-form-item>
           </a-col>
           <a-col :span="24">
-            <a-form-item label="flag" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input-number v-decorator="['flag', validatorRules.flag]" placeholder="请输入flag" style="width: 100%"/>
+            <a-form-item label="商品状态" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input-number v-decorator="['flag', validatorRules.flag]" placeholder="请输入商品状态" style="width: 100%"/>
             </a-form-item>
           </a-col>
           <a-col :span="24">
-            <a-form-item label="status" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input v-decorator="['status', validatorRules.status]" placeholder="请输入status"></a-input>
+            <a-form-item label="商品状态名称" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input v-decorator="['status', validatorRules.status]" placeholder="请输入商品状态名称"></a-input>
             </a-form-item>
           </a-col>
           <a-col :span="24">
-            <a-form-item label="brand" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input v-decorator="['brand']" placeholder="请输入brand"></a-input>
+            <a-form-item label="品牌" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input v-decorator="['brand']" placeholder="请输入品牌"></a-input>
             </a-form-item>
           </a-col>
           <a-col :span="24">
-            <a-form-item label="spec" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input v-decorator="['spec']" placeholder="请输入spec"></a-input>
+            <a-form-item label="规格" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input v-decorator="['spec']" placeholder="请输入规格"></a-input>
             </a-form-item>
           </a-col>
           <a-col :span="24">
-            <a-form-item label="indate" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input v-decorator="['indate']" placeholder="请输入indate"></a-input>
+            <a-form-item label="建档日期" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <j-date placeholder="请选择建档日期" v-decorator="['indate']" :trigger-change="true" style="width: 100%"/>
             </a-form-item>
           </a-col>
           <a-col :span="24">
-            <a-form-item label="deleted" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input v-decorator="['deleted']" placeholder="请输入deleted"></a-input>
+            <a-form-item label="删除状态" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input v-decorator="['deleted']" placeholder="请输入删除状态"></a-input>
             </a-form-item>
           </a-col>
           <a-col v-if="showFlowSubmitButton" :span="24" style="text-align: center">
@@ -68,11 +68,13 @@
   import pick from 'lodash.pick'
   import { validateDuplicateValue } from '@/utils/util'
   import JFormContainer from '@/components/jeecg/JFormContainer'
+  import JDate from '@/components/jeecg/JDate'  
 
   export default {
     name: 'ZvGoodsForm',
     components: {
       JFormContainer,
+      JDate,
     },
     props: {
       //流程表单data
@@ -110,12 +112,12 @@
         validatorRules: {
           flag: {
             rules: [
-              { required: true, message: '请输入flag!'},
+              { required: true, message: '请输入商品状态!'},
             ]
           },
           status: {
             rules: [
-              { required: true, message: '请输入status!'},
+              { required: true, message: '请输入商品状态名称!'},
             ]
           },
         },

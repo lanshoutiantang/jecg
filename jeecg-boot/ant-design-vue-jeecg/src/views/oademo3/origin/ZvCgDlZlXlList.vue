@@ -5,44 +5,44 @@
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="cgid">
-              <a-input placeholder="请输入cgid" v-model="queryParam.cgid"></a-input>
+            <a-form-item label="采购类编码">
+              <a-input placeholder="请输入采购类编码" v-model="queryParam.cgid"></a-input>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="cgname">
-              <a-input placeholder="请输入cgname" v-model="queryParam.cgname"></a-input>
+            <a-form-item label="采购类名称">
+              <a-input placeholder="请输入采购类名称" v-model="queryParam.cgname"></a-input>
             </a-form-item>
           </a-col>
           <template v-if="toggleSearchStatus">
             <a-col :xl="6" :lg="7" :md="8" :sm="24">
-              <a-form-item label="dlid">
-                <a-input placeholder="请输入dlid" v-model="queryParam.dlid"></a-input>
+              <a-form-item label="大类编码">
+                <a-input placeholder="请输入大类编码" v-model="queryParam.dlid"></a-input>
               </a-form-item>
             </a-col>
             <a-col :xl="6" :lg="7" :md="8" :sm="24">
-              <a-form-item label="dlname">
-                <a-input placeholder="请输入dlname" v-model="queryParam.dlname"></a-input>
+              <a-form-item label="大类名称">
+                <a-input placeholder="请输入大类名称" v-model="queryParam.dlname"></a-input>
               </a-form-item>
             </a-col>
             <a-col :xl="6" :lg="7" :md="8" :sm="24">
-              <a-form-item label="zlid">
-                <a-input placeholder="请输入zlid" v-model="queryParam.zlid"></a-input>
+              <a-form-item label="中类编码">
+                <a-input placeholder="请输入中类编码" v-model="queryParam.zlid"></a-input>
               </a-form-item>
             </a-col>
             <a-col :xl="6" :lg="7" :md="8" :sm="24">
-              <a-form-item label="zlname">
-                <a-input placeholder="请输入zlname" v-model="queryParam.zlname"></a-input>
+              <a-form-item label="中类名称">
+                <a-input placeholder="请输入中类名称" v-model="queryParam.zlname"></a-input>
               </a-form-item>
             </a-col>
             <a-col :xl="6" :lg="7" :md="8" :sm="24">
-              <a-form-item label="xlid">
-                <a-input placeholder="请输入xlid" v-model="queryParam.xlid"></a-input>
+              <a-form-item label="小类编码">
+                <a-input placeholder="请输入小类编码" v-model="queryParam.xlid"></a-input>
               </a-form-item>
             </a-col>
             <a-col :xl="6" :lg="7" :md="8" :sm="24">
-              <a-form-item label="xlname">
-                <a-input placeholder="请输入xlname" v-model="queryParam.xlname"></a-input>
+              <a-form-item label="小类名称">
+                <a-input placeholder="请输入小类名称" v-model="queryParam.xlname"></a-input>
               </a-form-item>
             </a-col>
           </template>
@@ -172,62 +172,62 @@
             }
           },
           {
-            title:'cgid',
+            title:'采购类编码',
             align:"center",
             dataIndex: 'cgid'
           },
           {
-            title:'cgname',
+            title:'采购类名称',
             align:"center",
             dataIndex: 'cgname'
           },
           {
-            title:'cg',
+            title:'采购类',
             align:"center",
             dataIndex: 'cg'
           },
           {
-            title:'dlid',
+            title:'大类编码',
             align:"center",
             dataIndex: 'dlid'
           },
           {
-            title:'dlname',
+            title:'大类名称',
             align:"center",
             dataIndex: 'dlname'
           },
           {
-            title:'dl',
+            title:'大类',
             align:"center",
             dataIndex: 'dl'
           },
           {
-            title:'zlid',
+            title:'中类编码',
             align:"center",
             dataIndex: 'zlid'
           },
           {
-            title:'zlname',
+            title:'中类名称',
             align:"center",
             dataIndex: 'zlname'
           },
           {
-            title:'zl',
+            title:'中类',
             align:"center",
             dataIndex: 'zl'
           },
           {
-            title:'xlid',
+            title:'小类编码',
             align:"center",
             dataIndex: 'xlid'
           },
           {
-            title:'xlname',
+            title:'小类名称',
             align:"center",
             dataIndex: 'xlname'
           },
           {
-            title:'xl',
+            title:'小类',
             align:"center",
             dataIndex: 'xl'
           },

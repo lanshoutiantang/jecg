@@ -39,7 +39,7 @@ import org.jeecg.common.aspect.annotation.AutoLog;
  /**
  * @Description: 促销明细结束待处理表
  * @Author: jeecg-boot
- * @Date:   2020-11-03
+ * @Date:   2020-11-19
  * @Version: V1.0
  */
 @Api(tags="促销明细结束待处理表")

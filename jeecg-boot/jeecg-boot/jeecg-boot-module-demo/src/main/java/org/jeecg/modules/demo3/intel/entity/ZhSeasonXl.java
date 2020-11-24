@@ -20,7 +20,7 @@ import lombok.experimental.Accessors;
 /**
  * @Description: 季节性商品
  * @Author: jeecg-boot
- * @Date:   2020-11-03
+ * @Date:   2020-11-12
  * @Version: V1.0
  */
 @Data
@@ -55,19 +55,40 @@ public class ZhSeasonXl implements Serializable {
     @ApiModelProperty(value = "所属部门")
     private java.lang.String sysOrgCode;
 	/**业务区标识*/
-	@Excel(name = "业务区标识", width = 15)
+	@Excel(name = "业务区标识", width = 15, dicCode = "city")
+	@Dict(dicCode = "city")
     @ApiModelProperty(value = "业务区标识")
     private java.lang.String ywqid;
 	/**小类编码*/
 	@Excel(name = "小类编码", width = 15)
     @ApiModelProperty(value = "小类编码")
     private java.lang.String xlid;
-	/**季节性商品分类*/
-	@Excel(name = "季节性商品分类", width = 15)
-    @ApiModelProperty(value = "季节性商品分类")
-    private java.lang.String seasontype;
 	/**季节开始日期*/
 	@Excel(name = "季节开始日期", width = 15)
     @ApiModelProperty(value = "季节开始日期")
     private java.lang.String begindate;
+	/**季节结束日期*/
+	@Excel(name = "季节结束日期", width = 15)
+    @ApiModelProperty(value = "季节结束日期")
+    private java.lang.String enddate;
+	/**季节性商品起季是首次到货日期*/
+	@Excel(name = "季节性商品起季是首次到货日期", width = 15)
+    @ApiModelProperty(value = "季节性商品起季是首次到货日期")
+    private java.lang.String arrdate;
+	/**季节开始与结束的中间周或日期具*/
+	@Excel(name = "季节开始与结束的中间周或日期具", width = 15)
+    @ApiModelProperty(value = "季节开始与结束的中间周或日期具")
+    private java.lang.Integer mweek;
+	/**季节内三年销量平均值*/
+	@Excel(name = "季节内三年销量平均值", width = 15)
+    @ApiModelProperty(value = "季节内三年销量平均值")
+    private java.math.BigDecimal mqty;
+	/**季节下降点*/
+	@Excel(name = "季节下降点", width = 15)
+    @ApiModelProperty(value = "季节下降点")
+    private java.lang.Integer aweek;
+	/**季节下降点之后日均销量的折扣比例*/
+	@Excel(name = "季节下降点之后日均销量的折扣比例", width = 15)
+    @ApiModelProperty(value = "季节下降点之后日均销量的折扣比例")
+    private java.lang.String rate;
 }

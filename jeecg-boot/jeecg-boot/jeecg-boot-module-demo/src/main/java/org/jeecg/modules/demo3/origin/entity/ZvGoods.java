@@ -20,7 +20,7 @@ import lombok.experimental.Accessors;
 /**
  * @Description: 商品资料表
  * @Author: jeecg-boot
- * @Date:   2020-11-04
+ * @Date:   2020-11-16
  * @Version: V1.0
  */
 @Data
@@ -54,44 +54,46 @@ public class ZvGoods implements Serializable {
 	/**所属部门*/
     @ApiModelProperty(value = "所属部门")
     private java.lang.String sysOrgCode;
-	/**goodsid*/
-	@Excel(name = "goodsid", width = 15)
-    @ApiModelProperty(value = "goodsid")
+	/**商品编码*/
+	@Excel(name = "商品编码", width = 15)
+    @ApiModelProperty(value = "商品编码")
     private java.lang.String goodsid;
-	/**barcodeid*/
-	@Excel(name = "barcodeid", width = 15)
-    @ApiModelProperty(value = "barcodeid")
+	/**商品分类*/
+	@Excel(name = "商品分类", width = 15)
+    @ApiModelProperty(value = "商品分类")
     private java.lang.String barcodeid;
-	/**deptid*/
-	@Excel(name = "deptid", width = 15)
-    @ApiModelProperty(value = "deptid")
+	/**商品分类（小类）*/
+	@Excel(name = "商品分类（小类）", width = 15)
+    @ApiModelProperty(value = "商品分类（小类）")
     private java.lang.String deptid;
-	/**name*/
-	@Excel(name = "name", width = 15)
-    @ApiModelProperty(value = "name")
+	/**商品名称*/
+	@Excel(name = "商品名称", width = 15)
+    @ApiModelProperty(value = "商品名称")
     private java.lang.String name;
-	/**flag*/
-	@Excel(name = "flag", width = 15)
-    @ApiModelProperty(value = "flag")
+	/**商品状态*/
+	@Excel(name = "商品状态", width = 15)
+    @ApiModelProperty(value = "商品状态")
     private java.lang.Integer flag;
-	/**status*/
-	@Excel(name = "status", width = 15)
-    @ApiModelProperty(value = "status")
+	/**商品状态名称*/
+	@Excel(name = "商品状态名称", width = 15)
+    @ApiModelProperty(value = "商品状态名称")
     private java.lang.String status;
-	/**brand*/
-	@Excel(name = "brand", width = 15)
-    @ApiModelProperty(value = "brand")
+	/**品牌*/
+	@Excel(name = "品牌", width = 15)
+    @ApiModelProperty(value = "品牌")
     private java.lang.String brand;
-	/**spec*/
-	@Excel(name = "spec", width = 15)
-    @ApiModelProperty(value = "spec")
+	/**规格*/
+	@Excel(name = "规格", width = 15)
+    @ApiModelProperty(value = "规格")
     private java.lang.String spec;
-	/**indate*/
-	@Excel(name = "indate", width = 15)
-    @ApiModelProperty(value = "indate")
-    private java.lang.String indate;
-	/**deleted*/
-	@Excel(name = "deleted", width = 15)
-    @ApiModelProperty(value = "deleted")
+	/**建档日期*/
+	@Excel(name = "建档日期", width = 15, format = "yyyy-MM-dd")
+	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @ApiModelProperty(value = "建档日期")
+    private java.util.Date indate;
+	/**删除状态*/
+	@Excel(name = "删除状态", width = 15)
+    @ApiModelProperty(value = "删除状态")
     private java.lang.String deleted;
 }
