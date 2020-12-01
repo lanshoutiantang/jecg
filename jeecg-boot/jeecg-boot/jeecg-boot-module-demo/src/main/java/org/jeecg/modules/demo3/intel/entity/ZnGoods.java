@@ -20,7 +20,7 @@ import lombok.experimental.Accessors;
 /**
  * @Description: 门店补货商品表
  * @Author: jeecg-boot
- * @Date:   2020-11-03
+ * @Date:   2020-11-25
  * @Version: V1.0
  */
 @Data
@@ -55,21 +55,70 @@ public class ZnGoods implements Serializable {
     @ApiModelProperty(value = "所属部门")
     private java.lang.String sysOrgCode;
 	/**门店编码*/
-	@Excel(name = "门店编码", width = 15)
+    @Excel(name = " 门店编码", width = 15, dictTable = "tb_organ", dicText = "name", dicCode = "organ")
+    @Dict(dictTable = "tb_organ", dicText = "name", dicCode = "organ")
     @ApiModelProperty(value = "门店编码")
     private java.lang.String shopid;
 	/**小类编码*/
 	@Excel(name = "小类编码", width = 15)
     @ApiModelProperty(value = "小类编码")
     private java.lang.String xlid;
+    /**小类名称*/
+    @Excel(name = "小类名称", width = 15)
+    @ApiModelProperty(value = "小类名称")
+    private java.lang.String xlname;
 	/**商品编码*/
 	@Excel(name = "商品编码", width = 15)
     @ApiModelProperty(value = "商品编码")
     private java.lang.String goodsid;
-	/**商品类别*/
-	@Excel(name = "商品类别", width = 15)
-    @ApiModelProperty(value = "商品类别")
+    /**商品名称*/
+    @Excel(name = "商品名称", width = 15)
+    @ApiModelProperty(value = "商品名称")
+    private java.lang.String goodsname;
+	/**补货类型*/
+	@Excel(name = "补货类型", width = 15)
+    @ApiModelProperty(value = "补货类型")
     private java.lang.String classtype;
+	/**季节属性*/
+	@Excel(name = "季节属性", width = 15)
+    @ApiModelProperty(value = "季节属性")
+    private java.lang.String seasontype;
+	/**季节性商品起季时首次到货日期*/
+	@Excel(name = "季节性商品起季时首次到货日期", width = 15)
+    @ApiModelProperty(value = "季节性商品起季时首次到货日期")
+    private java.lang.String arrdate;
+	/**季节下降点*/
+	@Excel(name = "季节下降点", width = 15)
+    @ApiModelProperty(value = "季节下降点")
+    private java.lang.Integer aweek;
+	/**季节下降点之后日均销量的折扣比例*/
+	@Excel(name = "季节下降点之后日均销量的折扣比例", width = 15)
+    @ApiModelProperty(value = "季节下降点之后日均销量的折扣比例")
+    private java.lang.String rate;
+	/**节日属性*/
+	@Excel(name = "节日属性", width = 15)
+    @ApiModelProperty(value = "节日属性")
+    private java.lang.String holidaytype;
+	/**节日开始日期*/
+	@Excel(name = "节日开始日期", width = 15, format = "yyyy-MM-dd")
+	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @ApiModelProperty(value = "节日开始日期")
+    private java.util.Date holidayBegindate;
+	/**节日结束日期*/
+	@Excel(name = "节日结束日期", width = 15, format = "yyyy-MM-dd")
+	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @ApiModelProperty(value = "节日结束日期")
+    private java.util.Date holidayEnddate;
+	/**春节指数*/
+	@Excel(name = "春节指数", width = 15)
+    @ApiModelProperty(value = "春节指数")
+    private java.math.BigDecimal zs;
+	/**节日安全系数*/
+	@Excel(name = "节日安全系数", width = 15)
+    @ApiModelProperty(value = "节日安全系数")
+    private java.math.BigDecimal hoRate;
 	/**定价*/
 	@Excel(name = "定价", width = 15)
     @ApiModelProperty(value = "定价")
@@ -100,28 +149,20 @@ public class ZnGoods implements Serializable {
     @DateTimeFormat(pattern="yyyy-MM-dd")
     @ApiModelProperty(value = "更新日期时间")
     private java.util.Date sdate;
-	/**季节属性*/
-	@Excel(name = "季节属性", width = 15)
-    @ApiModelProperty(value = "季节属性")
-    private java.lang.String seasontype;
-	/**季节开始日期*/
-	@Excel(name = "季节开始日期", width = 15)
-    @ApiModelProperty(value = "季节开始日期")
-    private java.lang.String seasonBegindate;
-	/**节日属性*/
-	@Excel(name = "节日属性", width = 15)
-    @ApiModelProperty(value = "节日属性")
-    private java.lang.String holidaytype;
-	/**节日开始日期*/
-	@Excel(name = "节日开始日期", width = 15, format = "yyyy-MM-dd")
-	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd")
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    @ApiModelProperty(value = "节日开始日期")
-    private java.util.Date holidayBegindate;
-	/**节日结束日期*/
-	@Excel(name = "节日结束日期", width = 15, format = "yyyy-MM-dd")
-	@JsonFormat(timezone = "GMT+8",pattern = "yyyy-MM-dd")
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    @ApiModelProperty(value = "节日结束日期")
-    private java.util.Date holidayEnddate;
+    /**业务区机构编码*/
+    @Excel(name = "业务区机构编码", width = 15)
+    @ApiModelProperty(value = "业务区机构编码")
+    private java.lang.String ywqOrgan;
+    /**门店机构编码*/
+    @Excel(name = "门店机构编码", width = 15)
+    @ApiModelProperty(value = "门店机构编码")
+    private java.lang.String shopOrgan;
+    /**部类机构编码*/
+    @Excel(name = "部类机构编码", width = 15)
+    @ApiModelProperty(value = "部类机构编码")
+    private java.lang.String blOrgan;
+    /**业务区机构编码*/
+    @Excel(name = "科类机构编码", width = 15)
+    @ApiModelProperty(value = "科类机构编码")
+    private java.lang.String klOrgan;
 }

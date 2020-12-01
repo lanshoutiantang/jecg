@@ -63,11 +63,19 @@ public class ZnHolidayXl implements Serializable {
 	@Excel(name = "节日代码", width = 15)
     @ApiModelProperty(value = "节日代码")
     private java.lang.String holidayid;
+    /**节日名称*/
+    @Excel(name = "节日名称", width = 15)
+    @ApiModelProperty(value = "节日名称")
+    private java.lang.String holidayname;
 	/**小类编码*/
-	@Excel(name = "小类编码", width = 15)
+    @Excel(name = "小类编码", width = 15)
     @ApiModelProperty(value = "小类编码")
     private java.lang.String xlid;
-	/**去年小类销售额*/
+    /**小类名称*/
+    @Excel(name = "小类名称", width = 15)
+    @ApiModelProperty(value = "小类名称")
+    private java.lang.String xlname;
+    /**去年小类销售额*/
 	@Excel(name = "去年小类销售额", width = 15)
     @ApiModelProperty(value = "去年小类销售额")
     private java.math.BigDecimal salevalue;

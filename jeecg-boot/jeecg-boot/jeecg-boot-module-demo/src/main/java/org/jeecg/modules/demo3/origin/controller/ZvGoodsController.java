@@ -10,6 +10,7 @@ import java.net.URLDecoder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.jeecg.common.api.vo.Result;
+import org.jeecg.common.aspect.annotation.PermissionData;
 import org.jeecg.common.system.query.QueryGenerator;
 import org.jeecg.common.util.oConvertUtils;
 import org.jeecg.modules.demo3.origin.entity.ZvGoods;
@@ -62,6 +63,7 @@ public class ZvGoodsController extends JeecgController<ZvGoods, IZvGoodsService>
 	@AutoLog(value = "商品资料表-分页列表查询")
 	@ApiOperation(value="商品资料表-分页列表查询", notes="商品资料表-分页列表查询")
 	@GetMapping(value = "/list")
+	@PermissionData(pageComponent = "oademo3/origin/ZvGoodsList")
 	public Result<?> queryPageList(ZvGoods zvGoods,
 								   @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
 								   @RequestParam(name="pageSize", defaultValue="10") Integer pageSize,

@@ -5,22 +5,10 @@
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="商品编码">
-              <a-input placeholder="请输入商品编码" v-model="queryParam.goodsid"></a-input>
+            <a-form-item label=" 士大夫">
+              <j-search-select-tag placeholder="请选择门店编码" v-model="queryParam.sadf" dict="tb_organ,name,organ"/>
             </a-form-item>
           </a-col>
-          <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="商品分类（小类）">
-              <a-input placeholder="请输入商品分类（小类）" v-model="queryParam.deptid"></a-input>
-            </a-form-item>
-          </a-col>
-          <template v-if="toggleSearchStatus">
-            <a-col :xl="6" :lg="7" :md="8" :sm="24">
-              <a-form-item label="商品名称">
-                <a-input placeholder="请输入商品名称" v-model="queryParam.name"></a-input>
-              </a-form-item>
-            </a-col>
-          </template>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
               <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
@@ -35,11 +23,11 @@
       </a-form>
     </div>
     <!-- 查询区域-END -->
-
+    
     <!-- 操作按钮区域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary" icon="download" @click="handleExportXls('商品资料表')">导出</a-button>
+      <a-button type="primary" icon="download" @click="handleExportXls('的撒法')">导出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
         <a-button type="primary" icon="import">导入</a-button>
       </a-upload>
@@ -61,15 +49,15 @@
       <a-table
         ref="table"
         size="middle"
-        :scroll="{x:true}"
         bordered
         rowKey="id"
+        class="j-table-force-nowrap"
+        :scroll="{x:true}"
         :columns="columns"
         :dataSource="dataSource"
         :pagination="ipagination"
         :loading="loading"
         :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: onSelectChange}"
-        class="j-table-force-nowrap"
         @change="handleTableChange">
 
         <template slot="htmlSlot" slot-scope="text">
@@ -114,26 +102,28 @@
       </a-table>
     </div>
 
-    <zv-goods-modal ref="modalForm" @ok="modalFormOk"></zv-goods-modal>
+    <hhhahoa-modal ref="modalForm" @ok="modalFormOk"/>
   </a-card>
 </template>
 
 <script>
 
-  import '@/assets/less/TableExpand.less'
-  import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
-  import ZvGoodsModal from './modules/ZvGoodsModal'
+  import HhhahoaModal from './modules/HhhahoaModal'
+  import {filterMultiDictText} from '@/components/dict/JDictSelectUtil'
+  import JSearchSelectTag from '@/components/dict/JSearchSelectTag'
+  import '@/assets/less/TableExpand.less'
 
   export default {
-    name: 'ZvGoodsList',
-    mixins:[JeecgListMixin, mixinDevice],
+    name: "HhhahoaList",
+    mixins:[JeecgListMixin],
     components: {
-      ZvGoodsModal
+      JSearchSelectTag,
+      HhhahoaModal
     },
     data () {
       return {
-        description: '商品资料表管理页面',
+        description: '的撒法管理页面',
         // 表头
         columns: [
           {
@@ -147,57 +137,14 @@
             }
           },
           {
-            title:'商品编码',
+            title:' 士大夫',
             align:"center",
-            dataIndex: 'goodsid'
+            dataIndex: 'sadf_dictText'
           },
           {
-            title:'商品分类',
+            title:'hgjg',
             align:"center",
-            dataIndex: 'barcodeid'
-          },
-          // {
-          //   title:'商品分类（小类）',
-          //   align:"center",
-          //   dataIndex: 'deptid'
-          // },
-          {
-            title:'商品名称',
-            align:"center",
-            dataIndex: 'name'
-          },
-          {
-            title:'商品状态',
-            align:"center",
-            dataIndex: 'flag'
-          },
-          {
-            title:'商品状态名称',
-            align:"center",
-            dataIndex: 'status'
-          },
-          {
-            title:'品牌',
-            align:"center",
-            dataIndex: 'brand'
-          },
-          {
-            title:'规格',
-            align:"center",
-            dataIndex: 'spec'
-          },
-          {
-            title:'建档日期',
-            align:"center",
-            dataIndex: 'indate',
-            customRender:function (text) {
-              return !text?"":(text.length>10?text.substr(0,10):text)
-            }
-          },
-          {
-            title:'删除状态',
-            align:"center",
-            dataIndex: 'deleted'
+            dataIndex: 'hgjj'
           },
           {
             title: '操作',
@@ -205,15 +152,15 @@
             align:"center",
             fixed:"right",
             width:147,
-            scopedSlots: { customRender: 'action' }
+            scopedSlots: { customRender: 'action' },
           }
         ],
         url: {
-          list: "/origin/zvGoods/list",
-          delete: "/origin/zvGoods/delete",
-          deleteBatch: "/origin/zvGoods/deleteBatch",
-          exportXlsUrl: "/origin/zvGoods/exportXls",
-          importExcelUrl: "origin/zvGoods/importExcel",
+          list: "/ddddd/hhhahoa/list",
+          delete: "/ddddd/hhhahoa/delete",
+          deleteBatch: "/ddddd/hhhahoa/deleteBatch",
+          exportXlsUrl: "/ddddd/hhhahoa/exportXls",
+          importExcelUrl: "ddddd/hhhahoa/importExcel",
           
         },
         dictOptions:{},
@@ -224,11 +171,12 @@
     computed: {
       importExcelUrl: function(){
         return `${window._CONFIG['domianURL']}/${this.url.importExcelUrl}`;
-      },
+      }
     },
     methods: {
       initDictConfig(){
-      }
+      },
+       
     }
   }
 </script>

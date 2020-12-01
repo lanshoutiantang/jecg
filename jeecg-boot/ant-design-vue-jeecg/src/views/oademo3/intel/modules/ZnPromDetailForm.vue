@@ -25,12 +25,18 @@
           </a-col>
           <a-col :span="24">
             <a-form-item label="门店编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input v-decorator="['shopid']" :disabled="isDisabledAuth('cuxiao:bukebianji')" placeholder="请输入门店编码"></a-input>
+<!--              <a-input v-decorator="['shopid']" :disabled="isDisabledAuth('cuxiao:bukebianji')" placeholder="请输入门店编码"></a-input>-->
+              <j-search-select-tag v-decorator="['shopid']" :disabled="isDisabledAuth('cuxiao:bukebianji')" dict="tb_organ,name,organ" />
             </a-form-item>
           </a-col>
           <a-col :span="24">
             <a-form-item label="商品编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
               <a-input v-decorator="['goodsid']" :disabled="isDisabledAuth('cuxiao:bukebianji')" placeholder="请输入商品编码"></a-input>
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="商品名称" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input v-decorator="['goodsname']" :disabled="isDisabledAuth('cuxiao:bukebianji')" placeholder="请输入商品名称"></a-input>
             </a-form-item>
           </a-col>
           <a-col :span="24">
@@ -65,10 +71,12 @@
   import JFormContainer from '@/components/jeecg/JFormContainer'
   import JDate from '@/components/jeecg/JDate'
   import {disabledAuthFilter} from "../../../../utils/authFilter";
+  import JSearchSelectTag from '@/components/dict/JSearchSelectTag'
 
   export default {
     name: 'ZnPromDetailForm',
     components: {
+        JSearchSelectTag,
       JFormContainer,
       JDate,
     },
@@ -149,7 +157,7 @@
         this.model = Object.assign({}, record);
         this.visible = true;
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(this.model,'planid','planname','begindate','enddate','shopid','goodsid','price','planqty','flag'))
+          this.form.setFieldsValue(pick(this.model,'planid','planname','begindate','enddate','shopid','goodsid','goodsname','price','planqty','flag'))
         })
       },
       //渲染流程表单数据
@@ -195,7 +203,7 @@
         })
       },
       popupCallback(row){
-        this.form.setFieldsValue(pick(row,'planid','planname','begindate','enddate','shopid','goodsid','price','planqty','flag'))
+        this.form.setFieldsValue(pick(row,'planid','planname','begindate','enddate','shopid','goodsid','goodsname','price','planqty','flag'))
       },
     }
   }

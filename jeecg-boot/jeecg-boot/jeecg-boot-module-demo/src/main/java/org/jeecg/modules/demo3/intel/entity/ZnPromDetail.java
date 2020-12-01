@@ -75,13 +75,18 @@ public class ZnPromDetail implements Serializable {
     @ApiModelProperty(value = "促销结束日期时间")
     private java.util.Date enddate;
 	/**门店编码*/
-	@Excel(name = "门店编码", width = 15)
+    @Excel(name = " 门店编码", width = 15, dictTable = "tb_organ", dicText = "name", dicCode = "organ")
+    @Dict(dictTable = "tb_organ", dicText = "name", dicCode = "organ")
     @ApiModelProperty(value = "门店编码")
     private java.lang.String shopid;
 	/**商品编码*/
 	@Excel(name = "商品编码", width = 15)
     @ApiModelProperty(value = "商品编码")
     private java.lang.String goodsid;
+    /**商品名称*/
+    @Excel(name = "商品名称", width = 15)
+    @ApiModelProperty(value = "商品名称")
+    private java.lang.String goodsname;
 	/**促销售价*/
 	@Excel(name = "促销售价", width = 15)
     @ApiModelProperty(value = "促销售价")

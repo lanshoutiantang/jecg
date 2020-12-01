@@ -54,6 +54,10 @@ public class ZnPromGoods implements Serializable {
 	@Excel(name = "商品编码", width = 15)
 	@ApiModelProperty(value = "商品编码")
 	private java.lang.String goodsid;
+	/**商品名称*/
+	@Excel(name = "商品名称", width = 15)
+	@ApiModelProperty(value = "商品名称")
+	private java.lang.String goodsname;
 	/**促销售价*/
 	@Excel(name = "促销售价", width = 15)
 	@ApiModelProperty(value = "促销售价")

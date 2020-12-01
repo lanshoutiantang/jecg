@@ -89,6 +89,10 @@
       title: '机构编码',
       dataIndex: 'orgCode'
     },
+      {
+          title: '超市机构编码',
+          dataIndex: 'csCode'
+      },
     {
       title: '手机号',
       dataIndex: 'mobile'

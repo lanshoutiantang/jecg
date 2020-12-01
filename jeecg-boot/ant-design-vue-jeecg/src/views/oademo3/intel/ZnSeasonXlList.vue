@@ -5,26 +5,27 @@
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="业务区标识">
-              <j-dict-select-tag placeholder="请选择业务区标识" v-model="queryParam.ywqid" dictCode="city"/>
+            <a-form-item label="业务区名称">
+              <j-dict-select-tag placeholder="请选择业务区名称" v-model="queryParam.ywqid" dictCode="city"/>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="小类编码">
-              <j-popup placeholder="请选择小类编码" v-model="queryParam.xlid" code="zn_xlid" org-fields="xlname" dest-fields="xlid" :field="getPopupField('xlid')"/>
+            <a-form-item label="小类名称">
+              <j-popup placeholder="请选择小类名称" v-model="queryParam.xlname" code="zn_xlid" org-fields="xlname" dest-fields="xlname" :field="getPopupField('xlname')"/>
+<!--              <j-search-select-tag placeholder="请选择小类编码" v-model="queryParam.xlid" dict="zv_cg_dl_zl_xl,xlname,xlid"/>-->
             </a-form-item>
           </a-col>
           <template v-if="toggleSearchStatus">
-            <a-col :xl="6" :lg="7" :md="8" :sm="24">
-              <a-form-item label="季节开始日期">
-                <a-input placeholder="请输入季节开始日期" v-model="queryParam.begindate"></a-input>
-              </a-form-item>
-            </a-col>
-            <a-col :xl="6" :lg="7" :md="8" :sm="24">
-              <a-form-item label="季节结束日期">
-                <a-input placeholder="请输入季节结束日期" v-model="queryParam.enddate"></a-input>
-              </a-form-item>
-            </a-col>
+<!--            <a-col :xl="6" :lg="7" :md="8" :sm="24">-->
+<!--              <a-form-item label="季节开始日期">-->
+<!--                <a-input placeholder="请输入季节开始日期" v-model="queryParam.begindate"></a-input>-->
+<!--              </a-form-item>-->
+<!--            </a-col>-->
+<!--            <a-col :xl="6" :lg="7" :md="8" :sm="24">-->
+<!--              <a-form-item label="季节结束日期">-->
+<!--                <a-input placeholder="请输入季节结束日期" v-model="queryParam.enddate"></a-input>-->
+<!--              </a-form-item>-->
+<!--            </a-col>-->
           </template>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
@@ -155,15 +156,20 @@
             }
           },
           {
-            title:'业务区标识',
+            title:'业务区名称',
             align:"center",
             dataIndex: 'ywqid_dictText'
           },
-          {
-            title:'小类编码',
-            align:"center",
-            dataIndex: 'xlid'
-          },
+          // {
+          //   title:'小类编码',
+          //   align:"center",
+          //   dataIndex: 'xlid'
+          // },
+            {
+                title:'小类名称',
+                align:"center",
+                dataIndex: 'xlname'
+            },
           {
             title:'季节开始日期',
             align:"center",

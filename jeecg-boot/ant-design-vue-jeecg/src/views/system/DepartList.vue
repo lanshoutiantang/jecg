@@ -128,6 +128,12 @@
               <a-form-item
                 :labelCol="labelCol"
                 :wrapperCol="wrapperCol"
+                label="超市机构编码">
+                <a-input placeholder="请输入超市机构编码" v-decorator="['csCode', {'initialValue':''}]" />
+              </a-form-item>
+              <a-form-item
+                :labelCol="labelCol"
+                :wrapperCol="wrapperCol"
                 label="手机号">
                 <a-input placeholder="请输入手机号" v-decorator="['mobile', {'initialValue':''}]"/>
               </a-form-item>
@@ -186,6 +192,10 @@
       title: '机构编码',
       dataIndex: 'orgCode',
     },
+      {
+          title: '机构编码',
+          dataIndex: 'csCode',
+      },
     {
       title: '手机号',
       dataIndex: 'mobile'
@@ -433,7 +443,7 @@
         }
         this.$nextTick(() => {
           this.form.getFieldDecorator('fax', {initialValue: ''})
-          this.form.setFieldsValue(pick(record, 'departName','orgCategory', 'orgCode', 'departOrder', 'mobile', 'fax', 'address', 'memo'))
+          this.form.setFieldsValue(pick(record, 'departName','orgCategory', 'orgCode', 'departOrder', 'csCode', 'mobile', 'fax', 'address', 'memo'))
         })
       },
       getCurrSelectedTitle() {

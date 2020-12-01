@@ -40,7 +40,7 @@ import org.jeecg.common.aspect.annotation.AutoLog;
  /**
  * @Description: 门店补货商品表
  * @Author: jeecg-boot
- * @Date:   2020-11-03
+ * @Date:   2020-11-25
  * @Version: V1.0
  */
 @Api(tags="门店补货商品表")
@@ -62,8 +62,8 @@ public class ZnGoodsController extends JeecgController<ZnGoods, IZnGoodsService>
 	 */
 	@AutoLog(value = "门店补货商品表-分页列表查询")
 	@ApiOperation(value="门店补货商品表-分页列表查询", notes="门店补货商品表-分页列表查询")
-	@PermissionData(pageComponent = "oademo3/intel/ZnGoodsList")
 	@GetMapping(value = "/list")
+	@PermissionData(pageComponent = "oademo3/intel/ZnGoodsList")
 	public Result<?> queryPageList(ZnGoods znGoods,
 								   @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
 								   @RequestParam(name="pageSize", defaultValue="10") Integer pageSize,

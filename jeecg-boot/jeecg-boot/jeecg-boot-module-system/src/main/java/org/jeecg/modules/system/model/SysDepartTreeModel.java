@@ -53,6 +53,8 @@ public class SysDepartTreeModel implements Serializable{
 
     private String orgCode;
 
+    private String csCode;
+
     private String mobile;
 
     private String fax;
@@ -94,6 +96,7 @@ public class SysDepartTreeModel implements Serializable{
         this.orgCategory = sysDepart.getOrgCategory();
         this.orgType = sysDepart.getOrgType();
         this.orgCode = sysDepart.getOrgCode();
+        this.csCode = sysDepart.getCsCode();
         this.mobile = sysDepart.getMobile();
         this.fax = sysDepart.getFax();
         this.address = sysDepart.getAddress();
@@ -206,6 +209,12 @@ public class SysDepartTreeModel implements Serializable{
     public void setOrgCode(String orgCode) {
         this.orgCode = orgCode;
     }
+
+    public String getCsCode() {
+        return csCode;
+    }
+
+    public void setCsCode(String csCode) { this.csCode = csCode; }
 
     public String getMobile() {
         return mobile;
@@ -343,6 +352,7 @@ public class SysDepartTreeModel implements Serializable{
                 Objects.equals(orgCategory, model.orgCategory) &&
                 Objects.equals(orgType, model.orgType) &&
                 Objects.equals(orgCode, model.orgCode) &&
+                Objects.equals(csCode, model.csCode) &&
                 Objects.equals(mobile, model.mobile) &&
                 Objects.equals(fax, model.fax) &&
                 Objects.equals(address, model.address) &&
@@ -363,7 +373,7 @@ public class SysDepartTreeModel implements Serializable{
     public int hashCode() {
 
         return Objects.hash(id, parentId, departName, departNameEn, departNameAbbr,
-        		departOrder, description, orgCategory, orgType, orgCode, mobile, fax, address, 
+        		departOrder, description, orgCategory, orgType, orgCode,csCode, mobile, fax, address,
         		memo, status, delFlag, createBy, createTime, updateBy, updateTime, 
         		children);
     }

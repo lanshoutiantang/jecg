@@ -5,8 +5,7 @@
         <a-row>
           <a-col :span="24">
             <a-form-item label="门店编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
-<!--              <a-input v-decorator="['shopid']" placeholder="请输入门店编码"></a-input>-->
-              <j-search-select-tag v-decorator="['shopid']"  dict="tb_organ,name,organ" />
+              <a-input v-decorator="['shopid']" placeholder="请输入门店编码"></a-input>
             </a-form-item>
           </a-col>
           <a-col :span="24">
@@ -15,40 +14,8 @@
             </a-form-item>
           </a-col>
           <a-col :span="24">
-            <a-form-item label="小类名称" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <j-popup
-                v-decorator="['xlname']"
-                :trigger-change="true"
-                org-fields="xlname,xlid"
-                dest-fields="xlname,xlid"
-                code="zn_xlid"
-                @callback="popupCallback"/>
-            </a-form-item>
-          </a-col>
-<!--          <a-col :span="24">-->
-<!--            <a-form-item label="商品编码" :labelCol="labelCol" :wrapperCol="wrapperCol">-->
-<!--              <a-input v-decorator="['goodsid']" placeholder="请输入商品编码"></a-input>-->
-<!--            </a-form-item>-->
-<!--          </a-col>-->
-<!--          <a-col :span="24">-->
-<!--            <a-form-item label="商品名称" :labelCol="labelCol" :wrapperCol="wrapperCol">-->
-<!--              <a-input v-decorator="['goodsid']" placeholder="请输入商品编码"></a-input>-->
-<!--            </a-form-item>-->
-<!--          </a-col>-->
-          <a-col :span="24">
             <a-form-item label="商品编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
               <a-input v-decorator="['goodsid']" placeholder="请输入商品编码"></a-input>
-            </a-form-item>
-          </a-col>
-          <a-col :span="24">
-            <a-form-item label="商品名称" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <j-popup
-                v-decorator="['goodsname']"
-                :trigger-change="true"
-                org-fields="goodsname,goodsid"
-                dest-fields="goodsname,goodsid"
-                code="zn_goodsid"
-                @callback="popupCallback"/>
             </a-form-item>
           </a-col>
           <a-col :span="24">
@@ -136,26 +103,6 @@
               <j-date placeholder="请选择更新日期时间" v-decorator="['sdate']" :trigger-change="true" style="width: 100%"/>
             </a-form-item>
           </a-col>
-          <a-col :span="24">
-            <a-form-item label="业务区机构编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input v-decorator="['ywqOrgan']" placeholder="请输入业务区机构编码"></a-input>
-            </a-form-item>
-          </a-col>
-          <a-col :span="24">
-            <a-form-item label="门店机构编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input v-decorator="['shopOrgan']" placeholder="请输入门店机构编码"></a-input>
-            </a-form-item>
-          </a-col>
-          <a-col :span="24">
-            <a-form-item label="部类机构编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input v-decorator="['blOrgan']" placeholder="请输入部类机构编码"></a-input>
-            </a-form-item>
-          </a-col>
-          <a-col :span="24">
-            <a-form-item label="科类机构编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input v-decorator="['klOrgan']" placeholder="请输入科类机构编码"></a-input>
-            </a-form-item>
-          </a-col>
           <a-col v-if="showFlowSubmitButton" :span="24" style="text-align: center">
             <a-button @click="submitForm">提 交</a-button>
           </a-col>
@@ -171,13 +118,11 @@
   import pick from 'lodash.pick'
   import { validateDuplicateValue } from '@/utils/util'
   import JFormContainer from '@/components/jeecg/JFormContainer'
-  import JDate from '@/components/jeecg/JDate'
-  import JSearchSelectTag from '@/components/dict/JSearchSelectTag'
+  import JDate from '@/components/jeecg/JDate'  
 
   export default {
     name: 'ZnGoodsForm',
     components: {
-        JSearchSelectTag,
       JFormContainer,
       JDate,
     },
@@ -255,7 +200,7 @@
         this.model = Object.assign({}, record);
         this.visible = true;
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(this.model,'shopid','xlid','xlname','goodsid','goodsname','classtype','seasontype','arrdate','aweek','rate','holidaytype','holidayBegindate','holidayEnddate','zs','hoRate','normalprice','minstock','minorder','closeqty','qty','flag','sdate','ywqOrgan','shopOrgan','blOrgan','klOrgan'))
+          this.form.setFieldsValue(pick(this.model,'shopid','xlid','goodsid','classtype','seasontype','arrdate','aweek','rate','holidaytype','holidayBegindate','holidayEnddate','zs','hoRate','normalprice','minstock','minorder','closeqty','qty','flag','sdate'))
         })
       },
       //渲染流程表单数据
@@ -301,7 +246,7 @@
         })
       },
       popupCallback(row){
-        this.form.setFieldsValue(pick(row,'shopid','xlid','xlname','goodsid','goodsname','classtype','seasontype','arrdate','aweek','rate','holidaytype','holidayBegindate','holidayEnddate','zs','hoRate','normalprice','minstock','minorder','closeqty','qty','flag','sdate','ywqOrgan','shopOrgan','blOrgan','klOrgan'))
+        this.form.setFieldsValue(pick(row,'shopid','xlid','goodsid','classtype','seasontype','arrdate','aweek','rate','holidaytype','holidayBegindate','holidayEnddate','zs','hoRate','normalprice','minstock','minorder','closeqty','qty','flag','sdate'))
       },
     }
   }

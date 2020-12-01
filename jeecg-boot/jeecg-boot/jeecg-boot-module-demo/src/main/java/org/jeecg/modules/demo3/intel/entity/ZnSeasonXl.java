@@ -63,6 +63,10 @@ public class ZnSeasonXl implements Serializable {
 	@Excel(name = "小类编码", width = 15)
     @ApiModelProperty(value = "小类编码")
     private java.lang.String xlid;
+    /**小类名称*/
+    @Excel(name = "小类名称", width = 15)
+    @ApiModelProperty(value = "小类名称")
+    private java.lang.String xlname;
 	/**季节开始日期*/
 	@Excel(name = "季节开始日期", width = 15)
     @ApiModelProperty(value = "季节开始日期")

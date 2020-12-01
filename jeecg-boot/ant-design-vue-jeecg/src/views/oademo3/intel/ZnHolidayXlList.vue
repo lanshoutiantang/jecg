@@ -5,22 +5,22 @@
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="业务区标识">
+            <a-form-item label="业务区名称">
 <!--              <a-input placeholder="请输入业务区标识" v-model="queryParam.ywqid"></a-input>-->
-              <j-dict-select-tag placeholder="请选择业务区标识" v-model="queryParam.ywqid" dictCode="city"/>
+              <j-dict-select-tag placeholder="请选择业务区名称" v-model="queryParam.ywqid" dictCode="city"/>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="节日代码">
+            <a-form-item label="节日名称">
 <!--              <a-input placeholder="请输入节日代码" v-model="queryParam.holidayid"></a-input>-->
-              <j-popup placeholder="请选择节日代码" v-model="queryParam.holidayid" code="zn_holidayname" org-fields="holidayname" dest-fields="holidayid" :field="getPopupField('holidayid')"/>
+              <j-popup placeholder="请选择节日名称" v-model="queryParam.holidayname" code="zn_holidayname" org-fields="holidayname" dest-fields="holidayname" :field="getPopupField('holidayname')"/>
             </a-form-item>
           </a-col>
           <template v-if="toggleSearchStatus">
             <a-col :xl="6" :lg="7" :md="8" :sm="24">
-              <a-form-item label="小类编码">
+              <a-form-item label="小类名称">
 <!--                <a-input placeholder="请输入小类编码" v-model="queryParam.xlid"></a-input>-->
-                <j-popup placeholder="请选择小类编码" v-model="queryParam.xlid" code="zn_xlid" org-fields="xlname" dest-fields="xlid" :field="getPopupField('xlid')"/>
+                <j-popup placeholder="请选择小类名称" v-model="queryParam.xlname" code="zn_xlid" org-fields="xlname" dest-fields="xlname" :field="getPopupField('xlname')"/>
               </a-form-item>
             </a-col>
           </template>
@@ -151,20 +151,30 @@
             }
           },
           {
-            title:'业务区标识',
+            title:'业务区名称',
             align:"center",
             dataIndex: 'ywqid_dictText'
           },
-          {
-            title:'节日代码',
-            align:"center",
-            dataIndex: 'holidayid'
-          },
-          {
-            title:'小类编码',
-            align:"center",
-            dataIndex: 'xlid'
-          },
+          // {
+          //   title:'节日代码',
+          //   align:"center",
+          //   dataIndex: 'holidayid'
+          // },
+            {
+                title:'节日名称',
+                align:"center",
+                dataIndex: 'holidayname'
+            },
+          // {
+          //   title:'小类编码',
+          //   align:"center",
+          //   dataIndex: 'xlid'
+          // },
+            {
+                title:'小类名称',
+                align:"center",
+                dataIndex: 'xlname'
+            },
           {
             title:'去年小类销售额',
             align:"center",

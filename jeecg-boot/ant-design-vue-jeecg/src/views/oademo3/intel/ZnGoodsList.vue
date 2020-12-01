@@ -5,24 +5,21 @@
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="门店编码">
-              <a-input placeholder="请输入门店编码" v-model="queryParam.shopid"></a-input>
+            <a-form-item label="门店名称">
+<!--              <a-input placeholder="请输入门店编码" v-model="queryParam.shopid"></a-input>-->
+              <j-search-select-tag placeholder="请选择门店名称" v-model="queryParam.shopid" dict="tb_organ,name,organ"/>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="小类编码">
-              <a-input placeholder="请输入小类编码" v-model="queryParam.xlid"></a-input>
+            <a-form-item label="小类名称">
+<!--              <a-input placeholder="请输入小类编码" v-model="queryParam.xlid"></a-input>-->
+              <j-popup placeholder="请选择小类名称" v-model="queryParam.xlname" code="zn_xlid" org-fields="xlname" dest-fields="xlname" :field="getPopupField('xlname')"/>
             </a-form-item>
           </a-col>
           <template v-if="toggleSearchStatus">
             <a-col :xl="6" :lg="7" :md="8" :sm="24">
-              <a-form-item label="商品编码">
-                <a-input placeholder="请输入商品编码" v-model="queryParam.goodsid"></a-input>
-              </a-form-item>
-            </a-col>
-            <a-col :xl="6" :lg="7" :md="8" :sm="24">
-              <a-form-item label="商品类别">
-                <a-input placeholder="请输入商品类别" v-model="queryParam.classtype"></a-input>
+              <a-form-item label="商品名称">
+                <j-popup placeholder="请选择商品名称" v-model="queryParam.goodsname" code="zn_goodsid" org-fields="goodsname" dest-fields="goodsname" :field="getPopupField('goodsname')"/>
               </a-form-item>
             </a-col>
           </template>
@@ -44,15 +41,15 @@
     <!-- 操作按钮区域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" v-has="'others:add'" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary" v-has="'others:download'" icon="download" @click="handleExportXls('门店补货商品表')">导出</a-button>
+      <a-button type="primary" icon="download" v-has="'others:download'" @click="handleExportXls('门店补货商品表')">导出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
-        <a-button type="primary" v-has="'others:import'"  icon="import">导入</a-button>
+        <a-button type="primary" v-has="'others:import'" icon="import">导入</a-button>
       </a-upload>
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay">
           <a-menu-item key="1" @click="batchDel"><a-icon type="delete"/>删除</a-menu-item>
         </a-menu>
-        <a-button v-has="'others:down'" style="margin-left: 8px"> 批量操作 <a-icon type="down" /></a-button>
+        <a-button v-has="'others:down'"  style="margin-left: 8px"> 批量操作 <a-icon type="down" /></a-button>
       </a-dropdown>
     </div>
 
@@ -129,11 +126,13 @@
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import ZnGoodsModal from './modules/ZnGoodsModal'
+  import JSearchSelectTag from '@/components/dict/JSearchSelectTag'
 
   export default {
     name: 'ZnGoodsList',
     mixins:[JeecgListMixin, mixinDevice],
     components: {
+        JSearchSelectTag,
       ZnGoodsModal
     },
     data () {
@@ -154,22 +153,83 @@
           {
             title:'门店编码',
             align:"center",
-            dataIndex: 'shopid'
+            dataIndex: 'shopid_dictText'
           },
           {
             title:'小类编码',
             align:"center",
             dataIndex: 'xlid'
           },
+            {
+                title:'小类名称',
+                align:"center",
+                dataIndex: 'xlname'
+            },
           {
             title:'商品编码',
             align:"center",
             dataIndex: 'goodsid'
           },
+            {
+                title:'商品名称',
+                align:"center",
+                dataIndex: 'goodsname'
+            },
           {
-            title:'商品类别',
+            title:'补货类型',
             align:"center",
             dataIndex: 'classtype'
+          },
+          {
+            title:'季节属性',
+            align:"center",
+            dataIndex: 'seasontype'
+          },
+          {
+            title:'季节性商品起季时首次到货日期',
+            align:"center",
+            dataIndex: 'arrdate'
+          },
+          {
+            title:'季节下降点',
+            align:"center",
+            dataIndex: 'aweek'
+          },
+          {
+            title:'季节下降点之后日均销量的折扣比例',
+            align:"center",
+            dataIndex: 'rate'
+          },
+          {
+            title:'节日属性',
+            align:"center",
+            dataIndex: 'holidaytype'
+          },
+          {
+            title:'节日开始日期',
+            align:"center",
+            dataIndex: 'holidayBegindate',
+            customRender:function (text) {
+              return !text?"":(text.length>10?text.substr(0,10):text)
+            }
+          },
+          {
+            title:'节日结束日期',
+            align:"center",
+            dataIndex: 'holidayEnddate',
+            customRender:function (text) {
+              return !text?"":(text.length>10?text.substr(0,10):text)
+            }
+          },
+          {
+            title:'春节指数',
+            align:"center",
+            dataIndex: 'zs'
+          },
+          {
+            title:'节日安全系数',
+            align:"center",
+            dataIndex: 'hoRate'
           },
           {
             title:'定价',
@@ -201,41 +261,30 @@
             align:"center",
             dataIndex: 'flag'
           },
+            {
+                title:'业务区机构编码',
+                align:"center",
+                dataIndex: 'ywqOrgan'
+            },
+            {
+                title:'门店机构编码',
+                align:"center",
+                dataIndex: 'shopOrgan'
+            },
+            {
+                title:'部类机构编码',
+                align:"center",
+                dataIndex: 'blOrgan'
+            },
+            {
+                title:'科类机构编码',
+                align:"center",
+                dataIndex: 'klOrgan'
+            },
           {
             title:'更新日期时间',
             align:"center",
             dataIndex: 'sdate',
-            customRender:function (text) {
-              return !text?"":(text.length>10?text.substr(0,10):text)
-            }
-          },
-          {
-            title:'季节属性',
-            align:"center",
-            dataIndex: 'seasontype'
-          },
-          {
-            title:'季节开始日期',
-            align:"center",
-            dataIndex: 'seasonBegindate'
-          },
-          {
-            title:'节日属性',
-            align:"center",
-            dataIndex: 'holidaytype'
-          },
-          {
-            title:'节日开始日期',
-            align:"center",
-            dataIndex: 'holidayBegindate',
-            customRender:function (text) {
-              return !text?"":(text.length>10?text.substr(0,10):text)
-            }
-          },
-          {
-            title:'节日结束日期',
-            align:"center",
-            dataIndex: 'holidayEnddate',
             customRender:function (text) {
               return !text?"":(text.length>10?text.substr(0,10):text)
             }

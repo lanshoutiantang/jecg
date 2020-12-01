@@ -4,28 +4,30 @@
       <a-form :form="form" slot="detail">
         <a-row>
           <a-col :span="24">
-            <a-form-item label="门店编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
+            <a-form-item label="门店名称" :labelCol="labelCol" :wrapperCol="wrapperCol">
 <!--              <a-input v-decorator="['shopid']" placeholder="请输入门店编码"></a-input>-->
-              <j-popup
-                v-decorator="['shopid']"
-                :trigger-change="true"
-                org-fields="shopname"
-                dest-fields="shopid"
-                code="zn_shopname"
-                @callback="popupCallback"/>
-            </a-form-item>
+<!--              <j-popup-->
+<!--                v-decorator="['shopid']"-->
+<!--                :trigger-change="true"-->
+<!--                org-fields="shopname"-->
+<!--                dest-fields="shopid"-->
+<!--                code="zn_shopname"-->
+<!--                @callback="popupCallback"/>-->
+              <j-search-select-tag v-decorator="['shopid']"  dict="tb_organ,name,organ" />
             </a-form-item>
           </a-col>
           <a-col :span="24">
-            <a-form-item label="参照门店编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
+            <a-form-item label="参照门店名称" :labelCol="labelCol" :wrapperCol="wrapperCol">
 <!--              <a-input v-decorator="['refshop']" placeholder="请输入参照门店编码"></a-input>-->
-              <j-popup
-                v-decorator="['refshop']"
-                :trigger-change="true"
-                org-fields="shopname"
-                dest-fields="refshop"
-                code="zn_shopname"
-                @callback="popupCallback"/>
+              <!--              <a-input v-decorator="['shopid']" placeholder="请输入门店编码"></a-input>-->
+              <!--              <j-popup-->
+              <!--                v-decorator="['shopid']"-->
+              <!--                :trigger-change="true"-->
+              <!--                org-fields="shopname"-->
+              <!--                dest-fields="shopid"-->
+              <!--                code="zn_shopname"-->
+              <!--                @callback="popupCallback"/>-->
+              <j-search-select-tag v-decorator="['refshop']"  dict="tb_organ,name,organ" />
             </a-form-item>
           </a-col>
           <a-col v-if="showFlowSubmitButton" :span="24" style="text-align: center">
@@ -43,10 +45,12 @@
   import pick from 'lodash.pick'
   import { validateDuplicateValue } from '@/utils/util'
   import JFormContainer from '@/components/jeecg/JFormContainer'
+  import JSearchSelectTag from '@/components/dict/JSearchSelectTag'
 
   export default {
     name: 'ZnRefshopForm',
     components: {
+        JSearchSelectTag,
       JFormContainer,
     },
     props: {

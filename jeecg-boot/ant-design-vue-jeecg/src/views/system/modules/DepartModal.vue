@@ -55,6 +55,12 @@
         <a-form-item
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
+          label="超市机构编码">
+          <a-input placeholder="请输入超市机构编码" v-decorator="['csCode', {}]" />
+        </a-form-item>
+        <a-form-item
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
           label="电话">
           <a-input placeholder="请输入电话" v-decorator="['mobile',validatorRules.mobile]" />
         </a-form-item>
@@ -170,7 +176,7 @@
             this.model.orgCategory = '2';
           }
           this.$nextTick(() => {
-            this.form.setFieldsValue(pick(this.model,'orgCategory','departName','departNameEn','departNameAbbr','departOrder','description','orgType','orgCode','mobile','fax','address','memo','status','delFlag'))
+            this.form.setFieldsValue(pick(this.model,'orgCategory','departName','departNameEn','departNameAbbr','departOrder','description','orgType','orgCode','csCode','mobile','fax','address','memo','status','delFlag'))
           });
       },
       close () {

@@ -5,15 +5,17 @@
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="门店编码">
+            <a-form-item label="门店名称">
 <!--              <a-input placeholder="请输入门店编码" v-model="queryParam.shopid"></a-input>-->
-              <j-popup placeholder="请选择门店编码" v-model="queryParam.shopid" code="zn_shopname" org-fields="shopname" dest-fields="shopid" :field="getPopupField('shopid')"/>
+<!--              <j-popup placeholder="请选择门店编码" v-model="queryParam.shopid" code="zn_shopname" org-fields="shopname" dest-fields="shopid" :field="getPopupField('shopid')"/>-->
+              <j-search-select-tag placeholder="请选择门店名称" v-model="queryParam.shopid" dict="tb_organ,name,organ"/>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="参照门店编码">
+            <a-form-item label="参照门店名称">
 <!--              <a-input placeholder="请输入参照门店编码" v-model="queryParam.refshop"></a-input>-->
-              <j-popup placeholder="请选择参照门店编码" v-model="queryParam.refshop" code="zn_shopname" org-fields="shopname" dest-fields="refshop" :field="getPopupField('refshop')"/>
+<!--              <j-popup placeholder="请选择参照门店编码" v-model="queryParam.refshop" code="zn_shopname" org-fields="shopname" dest-fields="refshop" :field="getPopupField('refshop')"/>-->
+              <j-search-select-tag placeholder="请选择门店名称" v-model="queryParam.refshop" dict="tb_organ,name,organ"/>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
@@ -119,11 +121,13 @@
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import ZnRefshopModal from './modules/ZnRefshopModal'
+  import JSearchSelectTag from '@/components/dict/JSearchSelectTag'
 
   export default {
     name: 'ZnRefshopList',
     mixins:[JeecgListMixin, mixinDevice],
     components: {
+        JSearchSelectTag,
       ZnRefshopModal
     },
     data () {
@@ -142,14 +146,14 @@
             }
           },
           {
-            title:'门店编码',
+            title:'门店名称',
             align:"center",
-            dataIndex: 'shopid'
+            dataIndex: 'shopid_dictText'
           },
           {
-            title:'参照门店编码',
+            title:'参照门店名称',
             align:"center",
-            dataIndex: 'refshop'
+            dataIndex: 'refshop_dictText'
           },
           {
             title: '操作',

@@ -48,6 +48,12 @@
       <a-form-item
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
+        label="超市机构编码">
+        <a-input placeholder="请输入超市机构编码" v-decorator="['csCode', {}]" />
+      </a-form-item>
+      <a-form-item
+        :labelCol="labelCol"
+        :wrapperCol="wrapperCol"
         label="手机号">
         <a-input style="border:0px;" placeholder="" v-decorator="['mobile', {}]"/>
       </a-form-item>
@@ -114,7 +120,7 @@
         console.log("record:");
         console.log(record);
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(record, 'orgCategory','departName', 'parentId', 'orgCode', 'departOrder', 'mobile', 'fax', 'address', 'memo'));
+          this.form.setFieldsValue(pick(record, 'orgCategory','departName', 'parentId', 'orgCode', 'departOrder', 'csCode', 'mobile', 'fax', 'address', 'memo'));
         });
       },
       clearForm() {

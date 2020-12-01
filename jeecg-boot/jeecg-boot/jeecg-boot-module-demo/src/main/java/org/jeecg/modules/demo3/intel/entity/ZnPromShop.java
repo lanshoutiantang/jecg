@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.jeecg.common.aspect.annotation.Dict;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.jeecgframework.poi.excel.annotation.Excel;
 import java.util.Date;
@@ -51,7 +52,9 @@ public class ZnPromShop implements Serializable {
 	@ApiModelProperty(value = "序号")
 	private java.lang.String serialid;
 	/**门店编码*/
-	@Excel(name = "门店编码", width = 15)
+//	@Excel(name = "门店编码", width = 15)
+	@Excel(name = " 门店编码", width = 15, dictTable = "tb_organ", dicText = "name", dicCode = "organ")
+	@Dict(dictTable = "tb_organ", dicText = "name", dicCode = "organ")
 	@ApiModelProperty(value = "门店编码")
 	private java.lang.String shopid;
 	/**备注*/

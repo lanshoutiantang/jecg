@@ -5,19 +5,19 @@
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="商品编码">
-              <a-input placeholder="请输入商品编码" v-model="queryParam.goodsid"></a-input>
+            <a-form-item label="门店编码">
+              <a-input placeholder="请输入门店编码" v-model="queryParam.shopid"></a-input>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="商品分类（小类）">
-              <a-input placeholder="请输入商品分类（小类）" v-model="queryParam.deptid"></a-input>
+            <a-form-item label="小类编码">
+              <a-input placeholder="请输入小类编码" v-model="queryParam.xlid"></a-input>
             </a-form-item>
           </a-col>
           <template v-if="toggleSearchStatus">
             <a-col :xl="6" :lg="7" :md="8" :sm="24">
-              <a-form-item label="商品名称">
-                <a-input placeholder="请输入商品名称" v-model="queryParam.name"></a-input>
+              <a-form-item label="商品编码">
+                <a-input placeholder="请输入商品编码" v-model="queryParam.goodsid"></a-input>
               </a-form-item>
             </a-col>
           </template>
@@ -39,7 +39,7 @@
     <!-- 操作按钮区域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary" icon="download" @click="handleExportXls('商品资料表')">导出</a-button>
+      <a-button type="primary" icon="download" @click="handleExportXls('门店补货商品表')">导出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
         <a-button type="primary" icon="import">导入</a-button>
       </a-upload>
@@ -114,7 +114,7 @@
       </a-table>
     </div>
 
-    <zv-goods-modal ref="modalForm" @ok="modalFormOk"></zv-goods-modal>
+    <zn-goods-modal ref="modalForm" @ok="modalFormOk"></zn-goods-modal>
   </a-card>
 </template>
 
@@ -123,17 +123,17 @@
   import '@/assets/less/TableExpand.less'
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
-  import ZvGoodsModal from './modules/ZvGoodsModal'
+  import ZnGoodsModal from './modules/ZnGoodsModal'
 
   export default {
-    name: 'ZvGoodsList',
+    name: 'ZnGoodsList',
     mixins:[JeecgListMixin, mixinDevice],
     components: {
-      ZvGoodsModal
+      ZnGoodsModal
     },
     data () {
       return {
-        description: '商品资料表管理页面',
+        description: '门店补货商品表管理页面',
         // 表头
         columns: [
           {
@@ -147,57 +147,113 @@
             }
           },
           {
+            title:'门店编码',
+            align:"center",
+            dataIndex: 'shopid'
+          },
+          {
+            title:'小类编码',
+            align:"center",
+            dataIndex: 'xlid'
+          },
+          {
             title:'商品编码',
             align:"center",
             dataIndex: 'goodsid'
           },
           {
-            title:'商品分类',
+            title:'补货类型',
             align:"center",
-            dataIndex: 'barcodeid'
-          },
-          // {
-          //   title:'商品分类（小类）',
-          //   align:"center",
-          //   dataIndex: 'deptid'
-          // },
-          {
-            title:'商品名称',
-            align:"center",
-            dataIndex: 'name'
+            dataIndex: 'classtype'
           },
           {
-            title:'商品状态',
+            title:'季节属性',
             align:"center",
-            dataIndex: 'flag'
+            dataIndex: 'seasontype'
           },
           {
-            title:'商品状态名称',
+            title:'季节性商品起季时首次到货日期',
             align:"center",
-            dataIndex: 'status'
+            dataIndex: 'arrdate'
           },
           {
-            title:'品牌',
+            title:'季节下降点',
             align:"center",
-            dataIndex: 'brand'
+            dataIndex: 'aweek'
           },
           {
-            title:'规格',
+            title:'季节下降点之后日均销量的折扣比例',
             align:"center",
-            dataIndex: 'spec'
+            dataIndex: 'rate'
           },
           {
-            title:'建档日期',
+            title:'节日属性',
             align:"center",
-            dataIndex: 'indate',
+            dataIndex: 'holidaytype'
+          },
+          {
+            title:'节日开始日期',
+            align:"center",
+            dataIndex: 'holidayBegindate',
             customRender:function (text) {
               return !text?"":(text.length>10?text.substr(0,10):text)
             }
           },
           {
-            title:'删除状态',
+            title:'节日结束日期',
             align:"center",
-            dataIndex: 'deleted'
+            dataIndex: 'holidayEnddate',
+            customRender:function (text) {
+              return !text?"":(text.length>10?text.substr(0,10):text)
+            }
+          },
+          {
+            title:'春节指数',
+            align:"center",
+            dataIndex: 'zs'
+          },
+          {
+            title:'节日安全系数',
+            align:"center",
+            dataIndex: 'hoRate'
+          },
+          {
+            title:'定价',
+            align:"center",
+            dataIndex: 'normalprice'
+          },
+          {
+            title:'最小库存数量',
+            align:"center",
+            dataIndex: 'minstock'
+          },
+          {
+            title:'最小起订量',
+            align:"center",
+            dataIndex: 'minorder'
+          },
+          {
+            title:'昨日日终库存数量',
+            align:"center",
+            dataIndex: 'closeqty'
+          },
+          {
+            title:'计算生成的补货数量',
+            align:"center",
+            dataIndex: 'qty'
+          },
+          {
+            title:'补货标识',
+            align:"center",
+            dataIndex: 'flag'
+          },
+          {
+            title:'更新日期时间',
+            align:"center",
+            dataIndex: 'sdate',
+            customRender:function (text) {
+              return !text?"":(text.length>10?text.substr(0,10):text)
+            }
           },
           {
             title: '操作',
@@ -209,11 +265,11 @@
           }
         ],
         url: {
-          list: "/origin/zvGoods/list",
-          delete: "/origin/zvGoods/delete",
-          deleteBatch: "/origin/zvGoods/deleteBatch",
-          exportXlsUrl: "/origin/zvGoods/exportXls",
-          importExcelUrl: "origin/zvGoods/importExcel",
+          list: "/intel/znGoods/list",
+          delete: "/intel/znGoods/delete",
+          deleteBatch: "/intel/znGoods/deleteBatch",
+          exportXlsUrl: "/intel/znGoods/exportXls",
+          importExcelUrl: "intel/znGoods/importExcel",
           
         },
         dictOptions:{},

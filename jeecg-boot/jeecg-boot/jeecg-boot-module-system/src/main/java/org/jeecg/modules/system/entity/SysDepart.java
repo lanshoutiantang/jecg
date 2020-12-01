@@ -55,6 +55,9 @@ public class SysDepart implements Serializable {
 	/**机构编码*/
 	@Excel(name="机构编码",width=15)
 	private String orgCode;
+	/**超市机构编码*/
+	@Excel(name="超市机构编码",width=15)
+	private String csCode;
 	/**手机号*/
 	@Excel(name="手机号",width=15)
 	private String mobile;
@@ -111,6 +114,7 @@ public class SysDepart implements Serializable {
                 Objects.equals(orgCategory, depart.orgCategory) &&
                 Objects.equals(orgType, depart.orgType) &&
                 Objects.equals(orgCode, depart.orgCode) &&
+				Objects.equals(csCode, depart.csCode) &&
                 Objects.equals(mobile, depart.mobile) &&
                 Objects.equals(fax, depart.fax) &&
                 Objects.equals(address, depart.address) &&
@@ -131,7 +135,7 @@ public class SysDepart implements Serializable {
 
         return Objects.hash(super.hashCode(), id, parentId, departName, 
         		departNameEn, departNameAbbr, departOrder, description,orgCategory, 
-        		orgType, orgCode, mobile, fax, address, memo, status, 
+        		orgType, orgCode,csCode, mobile, fax, address, memo, status,
         		delFlag, createBy, createTime, updateBy, updateTime);
     }
 }

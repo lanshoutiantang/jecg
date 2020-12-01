@@ -55,11 +55,14 @@ public class ZnRefshop implements Serializable {
     @ApiModelProperty(value = "所属部门")
     private java.lang.String sysOrgCode;
 	/**门店编码*/
-	@Excel(name = "门店编码", width = 15)
+    @Excel(name = " 门店编码", width = 15, dictTable = "tb_organ", dicText = "name", dicCode = "organ")
+    @Dict(dictTable = "tb_organ", dicText = "name", dicCode = "organ")
     @ApiModelProperty(value = "门店编码")
     private java.lang.String shopid;
 	/**参照门店编码*/
-	@Excel(name = "参照门店编码", width = 15)
+//	@Excel(name = "参照门店编码", width = 15)
+    @Excel(name = " 参照门店编码", width = 15, dictTable = "tb_organ", dicText = "name", dicCode = "organ")
+    @Dict(dictTable = "tb_organ", dicText = "name", dicCode = "organ")
     @ApiModelProperty(value = "参照门店编码")
     private java.lang.String refshop;
 }

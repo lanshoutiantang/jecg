@@ -21,13 +21,15 @@
               </a-form-item>
             </a-col>
             <a-col :xl="6" :lg="7" :md="8" :sm="24">
-              <a-form-item label="门店编码">
-                <a-input placeholder="请输入门店编码" v-model="queryParam.shopid"></a-input>
+              <a-form-item label="门店名称">
+<!--                <a-input placeholder="请输入门店编码" v-model="queryParam.shopid"></a-input>-->
+                <j-search-select-tag placeholder="请选择门店名称" v-model="queryParam.shopid" dict="tb_organ,name,organ"/>
               </a-form-item>
             </a-col>
             <a-col :xl="6" :lg="7" :md="8" :sm="24">
-              <a-form-item label="商品编码">
-                <a-input placeholder="请输入商品编码" v-model="queryParam.goodsid"></a-input>
+              <a-form-item label="商品名称">
+<!--                <a-input placeholder="请输入商品编码" v-model="queryParam.goodsid"></a-input>-->
+                <j-popup placeholder="请选择商品名称" v-model="queryParam.goodsname" code="zn_goodsid" org-fields="goodsname" dest-fields="goodsname" :field="getPopupField('goodsname')"/>
               </a-form-item>
             </a-col>
           </template>
@@ -136,11 +138,13 @@
   import ZnPromDetailModal from './modules/ZnPromDetailModal'
   import JDate from '@/components/jeecg/JDate.vue'
   import {colAuthFilter} from "../../../utils/authFilter";
+  import JSearchSelectTag from '@/components/dict/JSearchSelectTag'
 
   export default {
     name: 'ZnPromDetailList',
     mixins:[JeecgListMixin, mixinDevice],
     components: {
+        JSearchSelectTag,
       JDate,
       ZnPromDetailModal
     },
@@ -159,11 +163,11 @@
               return parseInt(index)+1;
             }
           },
-            {
-                title:'操作人',
-                align:"center",
-                dataIndex: 'createBy'
-            },
+            // {
+            //     title:'操作人',
+            //     align:"center",
+            //     dataIndex: 'createBy'
+            // },
           {
             title:'促销计划编号',
             align:"center",
@@ -185,15 +189,20 @@
             dataIndex: 'enddate'
           },
           {
-            title:'门店编码',
+            title:'门店名称',
             align:"center",
-            dataIndex: 'shopid'
+            dataIndex: 'shopid_dictText'
           },
-          {
-            title:'商品编码',
-            align:"center",
-            dataIndex: 'goodsid'
-          },
+          // {
+          //   title:'商品编码',
+          //   align:"center",
+          //   dataIndex: 'goodsid'
+          // },
+            {
+                title:'商品名称',
+                align:"center",
+                dataIndex: 'goodsname'
+            },
           {
             title:'促销售价',
             align:"center",

@@ -4,17 +4,22 @@
       <a-form :form="form" slot="detail">
         <a-row>
           <a-col :span="24">
-            <a-form-item label="业务区标识" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <j-dict-select-tag type="list" v-decorator="['ywqid']" :trigger-change="true" dictCode="city" placeholder="请选择业务区标识"/>
+            <a-form-item label="业务区名称" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <j-dict-select-tag type="list" v-decorator="['ywqid']" :trigger-change="true" dictCode="city" placeholder="请选择业务区名称"/>
             </a-form-item>
           </a-col>
           <a-col :span="24">
             <a-form-item label="小类编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input v-decorator="['xlid']" :disabled="isDisabledAuth('jie:bukebianji')" placeholder="请输入小类编码"></a-input>
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item label="小类名称" :labelCol="labelCol" :wrapperCol="wrapperCol">
               <j-popup
-                v-decorator="['xlid']"
+                v-decorator="['xlname']"
                 :trigger-change="true"
-                org-fields="xlname"
-                dest-fields="xlid"
+                org-fields="xlname,xlid"
+                dest-fields="xlname,xlid"
                 code="zn_xlid"
                 @callback="popupCallback"/>
             </a-form-item>
@@ -77,6 +82,7 @@
   import JDate from '@/components/jeecg/JDate'  
   import JDictSelectTag from "@/components/dict/JDictSelectTag"
   import {validateCheckRule} from "../../../../utils/util";
+  import {disabledAuthFilter} from "../../../../utils/authFilter";
 
   export default {
     name: 'ZnSeasonXlForm',
@@ -158,6 +164,8 @@
       this.showFlowData();
     },
     methods: {
+        isDisabledAuth(code){
+            return disabledAuthFilter(code);},
       add () {
         this.edit({});
       },
@@ -166,7 +174,7 @@
         this.model = Object.assign({}, record);
         this.visible = true;
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(this.model,'ywqid','xlid','begindate','enddate','arrdate','rate1','rate2','period2','period1','sdate'))
+          this.form.setFieldsValue(pick(this.model,'ywqid','xlid','xlname','begindate','enddate','arrdate','rate1','rate2','period2','period1','sdate'))
         })
       },
       //渲染流程表单数据
@@ -212,7 +220,7 @@
         })
       },
       popupCallback(row){
-        this.form.setFieldsValue(pick(row,'ywqid','xlid','begindate','enddate','arrdate','rate1','rate2','period2','period1','sdate'))
+        this.form.setFieldsValue(pick(row,'ywqid','xlid','xlname','begindate','enddate','arrdate','rate1','rate2','period2','period1','sdate'))
       },
     }
   }
