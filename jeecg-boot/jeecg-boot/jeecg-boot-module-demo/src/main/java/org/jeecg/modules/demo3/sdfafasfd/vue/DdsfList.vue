@@ -4,31 +4,13 @@
     <div class="table-page-search-wrapper">
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
-          <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="日期">
-              <j-date placeholder="请选择日期" v-model="queryParam.sundatedate"></j-date>
+          <a-col :xl="10" :lg="11" :md="12" :sm="24">
+            <a-form-item label="fds">
+              <j-date placeholder="请选择开始日期" class="query-group-cust" v-model="queryParam.dsa_begin"></j-date>
+              <span class="query-group-split-cust"></span>
+              <j-date placeholder="请选择结束日期" class="query-group-cust" v-model="queryParam.dsa_end"></j-date>
             </a-form-item>
           </a-col>
-          <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="阴历日期">
-              <j-popup placeholder="请选择阴历日期" v-model="queryParam.moondate" code="zn_moondate" org-fields="moondate" dest-fields="moondate" :field="getPopupField('moondate')"/>
-<!--              <a-input placeholder="请输入阴历日期" v-model="queryParam.moondate"></a-input>-->
-            </a-form-item>
-          </a-col>
-          <template v-if="toggleSearchStatus">
-            <a-col :xl="6" :lg="7" :md="8" :sm="24">
-              <a-form-item label="星期">
-                <j-dict-select-tag placeholder="请选择星期" v-model="queryParam.weekDay" dictCode="weekday"/>
-<!--                <a-input placeholder="请输入星期" v-model="queryParam.weekDay"></a-input>-->
-              </a-form-item>
-            </a-col>
-            <a-col :xl="6" :lg="7" :md="8" :sm="24">
-              <a-form-item label="节日名称">
-                <j-popup placeholder="请选择节日名称" v-model="queryParam.holidayname" code="zn_holidayname" org-fields="holidayname" dest-fields="holidayname" :field="getPopupField('holidayname')"/>
-<!--                <a-input placeholder="请输入节日名称" v-model="queryParam.holidayname"></a-input>-->
-              </a-form-item>
-            </a-col>
-          </template>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
               <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
@@ -46,16 +28,16 @@
 
     <!-- 操作按钮区域 -->
     <div class="table-operator">
-      <a-button @click="handleAdd" v-has="'calendar:add'" type="primary" icon="plus">新增</a-button>
-      <a-button type="primary" v-has="'calendar:download'" icon="download" @click="handleExportXls('阳历与阴历对应关系表')">导出</a-button>
+      <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
+      <a-button type="primary" icon="download" @click="handleExportXls('dsfd')">导出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
-        <a-button type="primary" v-has="'calendar:import'"  icon="import">导入</a-button>
+        <a-button type="primary" icon="import">导入</a-button>
       </a-upload>
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay">
           <a-menu-item key="1" @click="batchDel"><a-icon type="delete"/>删除</a-menu-item>
         </a-menu>
-        <a-button v-has="'calendar:down'"  style="margin-left: 8px"> 批量操作 <a-icon type="down" /></a-button>
+        <a-button style="margin-left: 8px"> 批量操作 <a-icon type="down" /></a-button>
       </a-dropdown>
     </div>
 
@@ -101,7 +83,7 @@
         </template>
 
         <span slot="action" slot-scope="text, record">
-          <a v-has="'calendar:edit'" @click="handleEdit(record)">编辑</a>
+          <a @click="handleEdit(record)">编辑</a>
 
           <a-divider type="vertical" />
           <a-dropdown>
@@ -112,7 +94,7 @@
               </a-menu-item>
               <a-menu-item>
                 <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
-                  <a v-has="'calendar:delete'">删除</a>
+                  <a>删除</a>
                 </a-popconfirm>
               </a-menu-item>
             </a-menu>
@@ -122,7 +104,7 @@
       </a-table>
     </div>
 
-    <zn-calendar-modal ref="modalForm" @ok="modalFormOk"></zn-calendar-modal>
+    <ddsf-modal ref="modalForm" @ok="modalFormOk"></ddsf-modal>
   </a-card>
 </template>
 
@@ -131,19 +113,19 @@
   import '@/assets/less/TableExpand.less'
   import { mixinDevice } from '@/utils/mixin'
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
-  import ZnCalendarModal from './modules/ZnCalendarModal__Style#Drawer'
+  import DdsfModal from './modules/DdsfModal'
   import JDate from '@/components/jeecg/JDate.vue'
 
   export default {
-    name: 'ZnCalendarList',
+    name: 'DdsfList',
     mixins:[JeecgListMixin, mixinDevice],
     components: {
       JDate,
-      ZnCalendarModal
+      DdsfModal
     },
     data () {
       return {
-        description: '阳历与阴历对应关系表管理页面',
+        description: 'dsfd管理页面',
         // 表头
         columns: [
           {
@@ -157,52 +139,9 @@
             }
           },
           {
-            title:'日期',
-              sorter: true,
+            title:'fds',
             align:"center",
-            dataIndex: 'sundatedate',
-            customRender:function (text) {
-              return !text?"":(text.length>10?text.substr(0,10):text)
-            }
-          },
-          {
-            title:'阴历日期',
-              sorter: true,
-            align:"center",
-            dataIndex: 'moondate'
-          },
-          {
-            title:'星期',
-              sorter: true,
-            align:"center",
-            dataIndex: 'weekDay'
-          },
-          {
-            title:'节日代码',
-              sorter: true,
-            align:"center",
-            dataIndex: 'holidayid'
-          },
-          {
-            title:'节日名称',
-              sorter: true,
-            align:"center",
-            dataIndex: 'holidayname'
-          },
-          {
-            title:'节日启动时间点',
-              sorter: true,
-            align:"center",
-            dataIndex: 'startdate',
-            customRender:function (text) {
-              return !text?"":(text.length>10?text.substr(0,10):text)
-            }
-          },
-          {
-            title:'节日结束时间点',
-              sorter: true,
-            align:"center",
-            dataIndex: 'enddate',
+            dataIndex: 'dsa',
             customRender:function (text) {
               return !text?"":(text.length>10?text.substr(0,10):text)
             }
@@ -217,11 +156,11 @@
           }
         ],
         url: {
-          list: "/intel/znCalendar/list",
-          delete: "/intel/znCalendar/delete",
-          deleteBatch: "/intel/znCalendar/deleteBatch",
-          exportXlsUrl: "/intel/znCalendar/exportXls",
-          importExcelUrl: "intel/znCalendar/importExcel",
+          list: "/sdfafasfd/ddsf/list",
+          delete: "/sdfafasfd/ddsf/delete",
+          deleteBatch: "/sdfafasfd/ddsf/deleteBatch",
+          exportXlsUrl: "/sdfafasfd/ddsf/exportXls",
+          importExcelUrl: "sdfafasfd/ddsf/importExcel",
           
         },
         dictOptions:{},

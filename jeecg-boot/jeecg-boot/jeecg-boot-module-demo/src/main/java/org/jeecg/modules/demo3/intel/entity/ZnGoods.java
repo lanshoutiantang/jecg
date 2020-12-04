@@ -59,6 +59,16 @@ public class ZnGoods implements Serializable {
     @Dict(dictTable = "tb_organ", dicText = "name", dicCode = "organ")
     @ApiModelProperty(value = "门店编码")
     private java.lang.String shopid;
+    /**部类编码*/
+    @Excel(name = " 部类编码", width = 15, dictTable = "blcode_name", dicText = "blname", dicCode = "blid")
+    @Dict(dictTable = "blcode_name", dicText = "blname", dicCode = "blid")
+    @ApiModelProperty(value = "部类编码")
+    private java.lang.String blid;
+    /**课类编码*/
+    @Excel(name = " 部类编码", width = 15, dictTable = "klcode_name", dicText = "klname", dicCode = "klid")
+    @Dict(dictTable = "klcode_name", dicText = "klname", dicCode = "klid")
+    @ApiModelProperty(value = "科类编码")
+    private java.lang.String klid;
 	/**小类编码*/
 	@Excel(name = "小类编码", width = 15)
     @ApiModelProperty(value = "小类编码")
@@ -140,7 +150,9 @@ public class ZnGoods implements Serializable {
     @ApiModelProperty(value = "计算生成的补货数量")
     private java.math.BigDecimal qty;
 	/**补货标识*/
-	@Excel(name = "补货标识", width = 15)
+    @Excel(name = " 补货标识", width = 15, dicCode = "flag")
+    @Dict(dicCode = "flag")
+//	@Excel(name = "补货标识", width = 15)
     @ApiModelProperty(value = "补货标识")
     private java.lang.String flag;
 	/**更新日期时间*/
@@ -161,8 +173,16 @@ public class ZnGoods implements Serializable {
     @Excel(name = "部类机构编码", width = 15)
     @ApiModelProperty(value = "部类机构编码")
     private java.lang.String blOrgan;
-    /**业务区机构编码*/
-    @Excel(name = "科类机构编码", width = 15)
-    @ApiModelProperty(value = "科类机构编码")
+    /**课类机构编码*/
+    @Excel(name = "课类机构编码", width = 15)
+    @ApiModelProperty(value = "课类机构编码")
     private java.lang.String klOrgan;
+    /**部类全部机构编码*/
+    @Excel(name = "部类全部机构编码", width = 15)
+    @ApiModelProperty(value = "部类全部机构编码")
+    private java.lang.String blOrganAll;
+    /**课类全部机构编码*/
+    @Excel(name = "课类全部机构编码", width = 15)
+    @ApiModelProperty(value = "课类全部机构编码")
+    private java.lang.String klOrganAll;
 }

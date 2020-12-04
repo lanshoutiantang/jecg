@@ -51,7 +51,13 @@
           </a-col>
           <a-col :span="24">
             <a-form-item label="补货标识" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input v-decorator="['flag']" :disabled="isDisabledAuth('cuxiao:bukebianji')" placeholder="请输入补货标识"></a-input>
+              <j-dict-select-tag type="list" v-decorator="['flag']" :trigger-change="true" dictCode="flag1" placeholder="请选择补货标识"/>
+<!--              <a-input v-decorator="['flag']" :disabled="isDisabledAuth('cuxiao:bukebianji')" placeholder="请输入补货标识"></a-input>-->
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item v-has="'cuxiao:code'" label="门店机构编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input v-decorator="['shopOrgan']" v-has="'cuxiao:code'" placeholder="请输入门店机构编码"></a-input>
             </a-form-item>
           </a-col>
           <a-col v-if="showFlowSubmitButton" :span="24" style="text-align: center">
@@ -157,7 +163,7 @@
         this.model = Object.assign({}, record);
         this.visible = true;
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(this.model,'planid','planname','begindate','enddate','shopid','goodsid','goodsname','price','planqty','flag'))
+          this.form.setFieldsValue(pick(this.model,'planid','planname','begindate','enddate','shopid','goodsid','goodsname','price','planqty','flag','shopOrgan'))
         })
       },
       //渲染流程表单数据
@@ -203,7 +209,7 @@
         })
       },
       popupCallback(row){
-        this.form.setFieldsValue(pick(row,'planid','planname','begindate','enddate','shopid','goodsid','goodsname','price','planqty','flag'))
+        this.form.setFieldsValue(pick(row,'planid','planname','begindate','enddate','shopid','goodsid','goodsname','price','planqty','flag','shopOrgan'))
       },
     }
   }

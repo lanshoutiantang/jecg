@@ -96,7 +96,12 @@ public class ZnPromDetail implements Serializable {
     @ApiModelProperty(value = "采购分货数量")
     private java.math.BigDecimal planqty;
 	/**补货标识*/
-	@Excel(name = "补货标识", width = 15)
+    @Excel(name = " 补货标识", width = 15, dicCode = "flag1")
+    @Dict(dicCode = "flag1")
     @ApiModelProperty(value = "补货标识")
     private java.lang.String flag;
+    /**门店机构编码*/
+    @Excel(name = "门店机构编码", width = 15)
+    @ApiModelProperty(value = "门店机构编码")
+    private java.lang.String shopOrgan;
 }

@@ -157,6 +157,7 @@
           },
           {
             title:'业务区名称',
+              sorter: true,
             align:"center",
             dataIndex: 'ywqid_dictText'
           },
@@ -167,46 +168,55 @@
           // },
             {
                 title:'小类名称',
+                sorter: true,
                 align:"center",
                 dataIndex: 'xlname'
             },
           {
             title:'季节开始日期',
+              sorter: true,
             align:"center",
             dataIndex: 'begindate'
           },
           {
             title:'季节结束日期',
+              sorter: true,
             align:"center",
             dataIndex: 'enddate'
           },
           {
             title:'季节性商品起季是首次到货日期',
+              sorter: true,
             align:"center",
             dataIndex: 'arrdate'
           },
           {
             title:'季节时间达到Period1，日均销量的折扣比例',
+              sorter: true,
             align:"center",
             dataIndex: 'rate1'
           },
           {
             title:'季节时间达到Period2，日均销量的折扣比例',
+              sorter: true,
             align:"center",
             dataIndex: 'rate2'
           },
           {
             title:'季节时间达到的比例2',
+              sorter: true,
             align:"center",
             dataIndex: 'period2'
           },
           {
             title:'季节时间达到的比例1',
+              sorter: true,
             align:"center",
             dataIndex: 'period1'
           },
           {
             title:'数据更新日期',
+              sorter: true,
             align:"center",
             dataIndex: 'sdate',
             customRender:function (text) {

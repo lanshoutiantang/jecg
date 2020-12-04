@@ -4,13 +4,25 @@
       <a-form :form="form" slot="detail">
         <a-row>
           <a-col :span="24">
-            <a-form-item label="门店编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
+            <a-form-item label="门店名称" :labelCol="labelCol" :wrapperCol="wrapperCol">
 <!--              <a-input v-decorator="['shopid']" placeholder="请输入门店编码"></a-input>-->
-              <j-search-select-tag v-decorator="['shopid']"  dict="tb_organ,name,organ" />
+              <j-search-select-tag v-decorator="['shopid']"  dict="v_zn_md_yt_ywq,shopname,shopid" />
             </a-form-item>
           </a-col>
           <a-col :span="24">
-            <a-form-item label="小类编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
+            <a-form-item v-has="'bh:code'" label="部类编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <j-search-select-tag v-decorator="['blid']"  dict="blcode_name,blname,blid" />
+<!--              <a-input v-decorator="['blid']" placeholder="请输入部类编码"></a-input>-->
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item v-has="'bh:code'" label="课类编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <j-search-select-tag v-decorator="['klid']"  dict="klcode_name,klname,klid" />
+<!--              <a-input v-decorator="['klid']" placeholder="请输入课类编码"></a-input>-->
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item v-has="'bh:code'" label="小类编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
               <a-input v-decorator="['xlid']" placeholder="请输入小类编码"></a-input>
             </a-form-item>
           </a-col>
@@ -36,7 +48,7 @@
 <!--            </a-form-item>-->
 <!--          </a-col>-->
           <a-col :span="24">
-            <a-form-item label="商品编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
+            <a-form-item v-has="'bh:code'" label="商品编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
               <a-input v-decorator="['goodsid']" placeholder="请输入商品编码"></a-input>
             </a-form-item>
           </a-col>
@@ -62,7 +74,8 @@
             </a-form-item>
           </a-col>
           <a-col :span="24">
-            <a-form-item label="季节性商品起季时首次到货日期" :labelCol="labelCol" :wrapperCol="wrapperCol">
+            <a-form-item label="季节首次到货日期" :labelCol="labelCol" :wrapperCol="wrapperCol">
+<!--              <a-form-item label="季节性商品起季时首次到货日期" :labelCol="labelCol" :wrapperCol="wrapperCol">-->
               <a-input v-decorator="['arrdate']" placeholder="请输入季节性商品起季时首次到货日期"></a-input>
             </a-form-item>
           </a-col>
@@ -72,7 +85,7 @@
             </a-form-item>
           </a-col>
           <a-col :span="24">
-            <a-form-item label="季节下降点之后日均销量的折扣比例" :labelCol="labelCol" :wrapperCol="wrapperCol">
+            <a-form-item label="日均销量的折扣比例" :labelCol="labelCol" :wrapperCol="wrapperCol">
               <a-input v-decorator="['rate']" placeholder="请输入季节下降点之后日均销量的折扣比例"></a-input>
             </a-form-item>
           </a-col>
@@ -128,32 +141,44 @@
           </a-col>
           <a-col :span="24">
             <a-form-item label="补货标识" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input v-decorator="['flag']" placeholder="请输入补货标识"></a-input>
+<!--              <j-dict-select-tag v-model="queryParam.flag" placeholder="请输入补货标识" dictCode="flag"/>-->
+              <j-dict-select-tag type="list" v-decorator="['flag']" :trigger-change="true" dictCode="flag" placeholder="请选择补货标识"/>
+<!--              <a-input v-decorator="['flag']" placeholder="请输入补货标识"></a-input>  flag-->
             </a-form-item>
           </a-col>
           <a-col :span="24">
-            <a-form-item label="更新日期时间" :labelCol="labelCol" :wrapperCol="wrapperCol">
+            <a-form-item  label="更新日期时间" :labelCol="labelCol" :wrapperCol="wrapperCol">
               <j-date placeholder="请选择更新日期时间" v-decorator="['sdate']" :trigger-change="true" style="width: 100%"/>
             </a-form-item>
           </a-col>
           <a-col :span="24">
-            <a-form-item label="业务区机构编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input v-decorator="['ywqOrgan']" placeholder="请输入业务区机构编码"></a-input>
+            <a-form-item v-has="'bh:code'" label="业务区机构编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input v-decorator="['ywqOrgan']" v-has="'bh:code'" placeholder="请输入业务区机构编码"></a-input>
             </a-form-item>
           </a-col>
           <a-col :span="24">
-            <a-form-item label="门店机构编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input v-decorator="['shopOrgan']" placeholder="请输入门店机构编码"></a-input>
+            <a-form-item v-has="'bh:code'" label="门店机构编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input v-decorator="['shopOrgan']" v-has="'bh:code'" placeholder="请输入门店机构编码"></a-input>
             </a-form-item>
           </a-col>
           <a-col :span="24">
-            <a-form-item label="部类机构编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input v-decorator="['blOrgan']" placeholder="请输入部类机构编码"></a-input>
+            <a-form-item v-has="'bh:code'" label="部类机构编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input v-decorator="['blOrgan']" v-has="'bh:code'" placeholder="请输入部类机构编码"></a-input>
             </a-form-item>
           </a-col>
           <a-col :span="24">
-            <a-form-item label="科类机构编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input v-decorator="['klOrgan']" placeholder="请输入科类机构编码"></a-input>
+            <a-form-item v-has="'bh:code'" label="课类机构编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input v-decorator="['klOrgan']" v-has="'bh:code'" placeholder="请输入课类机构编码"></a-input>
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item v-has="'bh:code'" label="部类全部机构编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input v-decorator="['blOrganAll']" v-has="'bh:code'" placeholder="请输入部类全部机构编码"></a-input>
+            </a-form-item>
+          </a-col>
+          <a-col :span="24">
+            <a-form-item v-has="'bh:code'" label="课类机构编码"  :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <a-input v-decorator="['klOrganAll']" v-has="'bh:code'" placeholder="请输入课类全部机构编码"></a-input>
             </a-form-item>
           </a-col>
           <a-col v-if="showFlowSubmitButton" :span="24" style="text-align: center">
@@ -173,6 +198,7 @@
   import JFormContainer from '@/components/jeecg/JFormContainer'
   import JDate from '@/components/jeecg/JDate'
   import JSearchSelectTag from '@/components/dict/JSearchSelectTag'
+  import {disabledAuthFilter} from "../../../../utils/authFilter";
 
   export default {
     name: 'ZnGoodsForm',
@@ -247,6 +273,9 @@
       this.showFlowData();
     },
     methods: {
+        isDisabledAuth(code){
+            return disabledAuthFilter(code);
+        },
       add () {
         this.edit({});
       },
@@ -255,7 +284,7 @@
         this.model = Object.assign({}, record);
         this.visible = true;
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(this.model,'shopid','xlid','xlname','goodsid','goodsname','classtype','seasontype','arrdate','aweek','rate','holidaytype','holidayBegindate','holidayEnddate','zs','hoRate','normalprice','minstock','minorder','closeqty','qty','flag','sdate','ywqOrgan','shopOrgan','blOrgan','klOrgan'))
+          this.form.setFieldsValue(pick(this.model,'shopid','blid','klid','xlid','xlname','goodsid','goodsname','classtype','seasontype','arrdate','aweek','rate','holidaytype','holidayBegindate','holidayEnddate','zs','hoRate','normalprice','minstock','minorder','closeqty','qty','flag','sdate','ywqOrgan','shopOrgan','blOrgan','klOrgan','blOrganAll','klOrganAll'))
         })
       },
       //渲染流程表单数据
@@ -301,7 +330,7 @@
         })
       },
       popupCallback(row){
-        this.form.setFieldsValue(pick(row,'shopid','xlid','xlname','goodsid','goodsname','classtype','seasontype','arrdate','aweek','rate','holidaytype','holidayBegindate','holidayEnddate','zs','hoRate','normalprice','minstock','minorder','closeqty','qty','flag','sdate','ywqOrgan','shopOrgan','blOrgan','klOrgan'))
+        this.form.setFieldsValue(pick(row,'shopid','blid','klid','xlid','xlname','goodsid','goodsname','classtype','seasontype','arrdate','aweek','rate','holidaytype','holidayBegindate','holidayEnddate','zs','hoRate','normalprice','minstock','minorder','closeqty','qty','flag','sdate','ywqOrgan','shopOrgan','blOrgan','klOrgan','blOrganAll','klOrganAll'))
       },
     }
   }

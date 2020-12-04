@@ -170,26 +170,31 @@
             // },
           {
             title:'促销计划编号',
+              sorter: true,
             align:"center",
             dataIndex: 'planid'
           },
           {
             title:'促销计划名称',
+              sorter: true,
             align:"center",
             dataIndex: 'planname'
           },
           {
             title:'促销开始日期时间',
+              sorter: true,
             align:"center",
             dataIndex: 'begindate'
           },
           {
             title:'促销结束日期时间',
+              sorter: true,
             align:"center",
             dataIndex: 'enddate'
           },
           {
             title:'门店名称',
+              sorter: true,
             align:"center",
             dataIndex: 'shopid_dictText'
           },
@@ -200,24 +205,33 @@
           // },
             {
                 title:'商品名称',
+                sorter: true,
                 align:"center",
                 dataIndex: 'goodsname'
             },
           {
             title:'促销售价',
+              sorter: true,
             align:"center",
             dataIndex: 'price'
           },
           {
             title:'采购分货数量',
+              sorter: true,
             align:"center",
             dataIndex: 'planqty'
           },
           {
             title:'补货标识',
+              sorter: true,
             align:"center",
             dataIndex: 'flag'
           },
+            // {
+            //     title:'门店机构编码',
+            //     align:"center",
+            //     dataIndex: 'shopOrgan'
+            // },
           {
             title: '操作',
             dataIndex: 'action',

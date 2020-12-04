@@ -147,11 +147,13 @@
           },
           {
             title:'门店名称',
+              sorter: true,
             align:"center",
             dataIndex: 'shopid_dictText'
           },
           {
             title:'参照门店名称',
+              sorter: true,
             align:"center",
             dataIndex: 'refshop_dictText'
           },

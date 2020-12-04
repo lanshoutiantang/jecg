@@ -154,16 +154,19 @@
           },
           {
             title:'促销计划编号',
+              sorter: true,
             align:"center",
             dataIndex: 'planid'
           },
           {
             title:'促销计划名称',
+              sorter: true,
             align:"center",
             dataIndex: 'planname'
           },
           {
             title:'促销开始日期时间',
+              sorter: true,
             align:"center",
             dataIndex: 'begindate',
             customRender:function (text) {
@@ -172,6 +175,7 @@
           },
           {
             title:'促销结束日期时间',
+              sorter: true,
             align:"center",
             dataIndex: 'enddate',
             customRender:function (text) {

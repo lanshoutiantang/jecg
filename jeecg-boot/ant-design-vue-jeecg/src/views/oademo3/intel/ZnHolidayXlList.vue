@@ -152,6 +152,7 @@
           },
           {
             title:'业务区名称',
+              sorter: true,
             align:"center",
             dataIndex: 'ywqid_dictText'
           },
@@ -162,6 +163,7 @@
           // },
             {
                 title:'节日名称',
+                sorter: true,
                 align:"center",
                 dataIndex: 'holidayname'
             },
@@ -172,21 +174,25 @@
           // },
             {
                 title:'小类名称',
+                sorter: true,
                 align:"center",
                 dataIndex: 'xlname'
             },
           {
             title:'去年小类销售额',
+              sorter: true,
             align:"center",
             dataIndex: 'salevalue'
           },
           {
             title:'春节指数',
+              sorter: true,
             align:"center",
             dataIndex: 'zs'
           },
           {
             title:'节日安全系数',
+              sorter: true,
             align:"center",
             dataIndex: 'rate'
           },
